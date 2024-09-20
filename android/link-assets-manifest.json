@@ -1,0 +1,21 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/georgia.ttf",
+      "sha1": "5818c435d0ff1333d98891690a83f50e56bc5a3b"
+    },
+    {
+      "path": "src/assets/fonts/georgiab.ttf",
+      "sha1": "e27ea4537381876f28e11c52fd383b98933ee58b"
+    },
+    {
+      "path": "src/assets/fonts/georgiai.ttf",
+      "sha1": "461596c20be5bb991d4749c06dc54ad410144474"
+    },
+    {
+      "path": "src/assets/fonts/georgiaz.ttf",
+      "sha1": "c093a9eabcf4e3c233afef89285f1662798d2086"
+    }
+  ]
+}
