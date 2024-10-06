@@ -6,6 +6,7 @@ import {
     Image,
     Text,
     Dimensions,
+    TouchableOpacity,
 } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -15,6 +16,9 @@ import { IMAGES } from '../Theme/Images';
 
 // Get the width of the screen
 const { width, height } = Dimensions.get('window');
+// Calculate the screen diagonal size in inches
+const screenDiagonal = Math.sqrt(width * width + height * height) / 160;
+console.log(screenDiagonal, 'Screen size');
 
 type SlidesTypes = {
     id: string;
@@ -28,86 +32,139 @@ const slides: SlidesTypes[] = [
         image: IMAGES.ONBOARDING1,
         title: 'Structure \nyour learning',
         subtitle:
-            'We’ll help you achieve your full potential by providing \nthe tools to achieve your goals',
+            'We’ll help you achieve your full potential by providing the tools to achieve your goals',
     },
     {
         id: '2',
         image: IMAGES.ONBOARDING2,
         title: 'Stay ahead of \nyour peers',
         subtitle:
-            'We’ll help you achieve your full potential by providing \nthe tools to achieve your goals',
+            'We’ll help you achieve your full potential by providing the tools to achieve your goals',
     },
     {
         id: '3',
         image: IMAGES.ONBOARDING3,
         title: 'Select your \naccess level',
         subtitle:
-            'We’ll help you achieve your full potential by providing \nthe tools to achieve your goals',
+            'We’ll help you achieve your full potential by providing the tools to achieve your goals',
     },
     {
         id: '4',
         image: IMAGES.ONBOARDING4,
         title: 'Monitor your \nchild’s progress',
         subtitle:
-            'We’ll help you achieve your full potential by providing \nthe tools to achieve your goals',
+            'We’ll help you achieve your full potential by providing the tools to achieve your goals',
     },
 ];
 
-const Slide = ({ item }: { item: SlidesTypes }) => {
-    return (
-        <View style={[styles.sliderStyle, { width, height }]}>
-            <View style={styles.horizonStretch}>
-                <View style={styles.titleViewStyle}>
-                    <Text style={styles.title}>{item.title}</Text>
-                    <View style={styles.rectangle} />
-                </View>
-                <Text style={styles.skipStyle}>Skip</Text>
-            </View>
-            <Image source={item.image} style={styles.sliderImage} />
-            <Text style={styles.subtitle}>{item.subtitle}</Text>
-        </View>
-    );
-};
-
-const OnboardingScreen = () => {
+const OnboardingScreen = ({ navigation }) => {
     const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+    const ref = React.useRef(null);
+
     // eslint-disable-next-line react/no-unstable-nested-components
-    const Footer = () => {
+    const Slide = ({ item }: { item: SlidesTypes }) => {
+        const SkipSlide = () => {
+            const lastSlideIndex = slides.length - 1;
+            const offset = lastSlideIndex * width; // Correct variable name
+            ref?.current?.scrollToOffset({ offset, animated: true }); // Proper offset and animated parameter
+            setCurrentSlideIndex(lastSlideIndex);
+        };
         return (
-            <View style={styles.footerView1}>
-                <View style={styles.footerView2}>
-                    {slides.map((_, index) => (
-                        <View
-                            key={index}
-                            style={[
-                                styles.indicator,
-                                currentSlideIndex === index && {
-                                    backgroundColor: '#D27A24',
-                                    width: 24,
-                                },
-                            ]}
-                        />
-                    ))}
+            <View style={[styles.sliderStyle, { width, height }]}>
+                <View style={styles.horizonStretch}>
+                    <View style={styles.titleViewStyle}>
+                        <Text style={styles.title}>{item.title}</Text>
+                        <View style={styles.rectangle} />
+                    </View>
+                    {currentSlideIndex === slides.length - 1 ? (
+                        <TouchableOpacity onPress={() => navigation.replace('LoginScreen')}>
+                            <Text style={styles.skipStyle}>Finish</Text>
+                        </TouchableOpacity>
+                    ) : (
+                        <TouchableOpacity onPress={SkipSlide}>
+                            <Text style={styles.skipStyle}>Skip</Text>
+                        </TouchableOpacity>
+                    )}
+                </View>
+                <View
+                    style={[
+                        styles.imageText,
+                        screenDiagonal < 5.5 ? { marginTop: -30 } : {},
+                    ]}>
+                    <View style={styles.imageSubtitleContainer}>
+                        <Image source={item.image} style={styles.sliderImage} />
+                        <Text style={styles.subtitle} numberOfLines={2}>
+                            {item.subtitle}
+                        </Text>
+                    </View>
                 </View>
             </View>
         );
     };
+    // eslint-disable-next-line react/no-unstable-nested-components
+    const Footer = () => {
+        return (
+            <View style={styles.footerView1}>
+                {currentSlideIndex === slides.length - 1 ? (
+                    <View>
+                        <View style={styles.buttonGetStarted}>
+                            <TouchableOpacity
+                                style={styles.btn}
+                                onPress={() => navigation.replace('LoginScreen')}>
+                                <Text style={styles.loginText}>Login</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                ) : (
+                    <View style={styles.footerView2}>
+                        {slides.map((_, index) => (
+                            <View
+                                key={index}
+                                style={[
+                                    styles.indicator,
+                                    currentSlideIndex === index && {
+                                        backgroundColor: '#D27A24',
+                                        width: 24,
+                                    },
+                                ]}
+                            />
+                        ))}
+                    </View>
+                )}
+            </View>
+        );
+    };
+
+    const updateCurrentSLideIndex = (e: any) => {
+        const contentOffsetX = e.nativeEvent.contentOffset.x;
+        const currentIndex = Math.round(contentOffsetX / width);
+        setCurrentSlideIndex(currentIndex);
+        console.log(currentIndex);
+    };
+
     return (
         <LinearGradient colors={['#f0f0f0', '#f8f0eb']} style={styles.container}>
             <SafeAreaView style={styles.container}>
                 <StatusBar backgroundColor={'#f0f0f0'} barStyle={'dark-content'} />
-                <FlatList
-                    // onMomentumScrollEnd={}
-                    pagingEnabled
-                    data={slides}
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    renderItem={({ item }) => <Slide item={item} />}
-                    keyExtractor={item => item.id}
-                    snapToAlignment="center"
-                    decelerationRate="fast"
-                />
-                <Footer />
+                <View
+                    style={[
+                        styles.centeredView,
+                        screenDiagonal > 5.5 ? { paddingTop: 40 } : {}, // Conditional padding based on screen size
+                    ]}>
+                    <FlatList
+                        ref={ref}
+                        onMomentumScrollEnd={updateCurrentSLideIndex}
+                        pagingEnabled
+                        data={slides}
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        renderItem={({ item }) => <Slide item={item} />}
+                        keyExtractor={item => item.id}
+                        snapToAlignment="center"
+                        decelerationRate="fast"
+                    />
+                    <Footer />
+                </View>
             </SafeAreaView>
         </LinearGradient>
     );
@@ -126,8 +183,10 @@ const styles = StyleSheet.create({
     },
     sliderStyle: {
         flex: 1,
-        paddingHorizontal: 20,
-        justifyContent: 'center',
+        paddingHorizontal: 15,
+        //   paddingTop: 20,
+        alignContent: 'center',
+        // justifyContent: 'center',
     },
     title: {
         fontSize: 24,
@@ -137,27 +196,45 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     subtitle: {
-        fontSize: 12,
+        fontSize: 16,
         color: '#212121',
         paddingTop: 10,
         alignSelf: 'center',
         fontFamily: 'georgia',
+        lineHeight: 19.5,
+        width: '85%',
     },
     sliderImage: {
         resizeMode: 'contain',
         alignSelf: 'center',
+        justifyContent: 'center',
         width: '100%',
-        height: '50%',
+        paddingBottom: 100,
+        // height: '0%',
+    },
+    imageSubtitleContainer: {
+        width: '100%', // This will ensure the container takes up the full width of the screen
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignContent: 'center',
     },
     rectangle: {
         width: 100,
         height: 2,
         backgroundColor: '#D27A24',
     },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        width: width,
+        paddingTop: 0,
+    },
     footerView1: {
-        height: '5%',
-        justifyContent: 'space-between',
+        height: '10%',
+        justifyContent: 'center',
         paddingHorizontal: 20,
+        paddingBottom: 50,
     },
     footerView2: {
         flexDirection: 'row',
@@ -173,10 +250,33 @@ const styles = StyleSheet.create({
     },
     horizonStretch: {
         flexDirection: 'row',
+        paddingTop: 0,
         justifyContent: 'space-between',
     },
     skipStyle: {
         fontFamily: 'georgia',
         color: '#212121',
+    },
+    imageText: {
+        flex: 1,
+        //   marginTop: -30,
+    },
+    buttonGetStarted: {
+        height: 50,
+        marginTop: 50,
+    },
+    btn: {
+        height: 46,
+        width: 310,
+        backgroundColor: '#D27A24',
+        borderRadius: 4,
+        justifyContent: 'center',
+    },
+    loginText: {
+        alignSelf: 'center',
+        color: 'white',
+        fontFamily: 'georgia',
+        fontSize: 17,
+        lineHeight: 25.5,
     },
 });
