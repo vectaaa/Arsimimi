@@ -1,6 +1,6 @@
 import React from 'react';
 import { Pressable, PressableProps, ViewStyle } from 'react-native';
-import { debounce } from 'lodash';
+import {debounce} from 'lodash';
 
 export type PressableOpacityProps = PressableProps & {
   testingSuffix: string;

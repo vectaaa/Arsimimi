@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, StyleSheet, TextProps, TextStyle, StyleProp, ColorValue } from 'react-native';
 import { COLORS } from '../Theme/Colors';
-import { useScaling } from '../Hooks/useScaling';
+import { useScaling } from '../Hooks/useScaling.tsx';
 
 export type FontWeight =
   | '100' // Thin

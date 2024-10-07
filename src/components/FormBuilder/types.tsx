@@ -13,6 +13,7 @@ export enum FieldTypes {
     DATE = 'date',
     PIN = 'pin',
     CHECKBOX = 'checkbox',
+    MODAL_SELECTOR = "modalSelector",
 }
 
 

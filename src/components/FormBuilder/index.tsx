@@ -24,7 +24,7 @@ import {BaseInputProps} from '../Inputs/BaseInputs';
 import {SelectPickerProps} from '../SelectPicker/types';
 import {styling} from '@/Theme/Styles/GlobalStyles';
 import {SelectorInput} from '@/Components/FormBuilder/SelectorInput';
-import {PinInput} from '@/Components/Inputs/PinInput';
+import {PinInput} from '../../Components/Inputs/PinInput';
 import {Typography} from '@/Components/Typography';
 
 const FormValuesGrabber = ({
@@ -114,7 +114,7 @@ export function FormBuilder<ReturnType extends FieldValues>({
                         {...(fieldProps as BaseInputFormProps)}
                         subtype={subtype as BaseInputSubTypes}
                         value={(values as InputFieldValues)[name]}
-                        onChangeText={value => setFieldValue(name, value)}
+                        onChangeText={(value: string) => setFieldValue(name, value)}
                       />
                     );
                     break;
@@ -177,7 +177,7 @@ export function FormBuilder<ReturnType extends FieldValues>({
                           </Typography>
                         }
                         pin={(values as PinFieldValues)[name]}
-                        onPinChange={item => setFieldValue(name, item)}
+                        onPinChange={(item: string) => setFieldValue(name, item)}
                         errorMessage={errors[name] as string}
                       />
                     );
