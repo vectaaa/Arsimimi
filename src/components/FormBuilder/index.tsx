@@ -2,8 +2,8 @@ import React, {useEffect} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Formik, useFormikContext} from 'formik';
 
-import {Button} from '@/Components/Buttons/Button';
-import {Checkbox, CheckboxProps} from '@/Components/Controls/Checkbox';
+import {Button} from '../../components/Buttons/Button';
+import {Checkbox, CheckboxProps} from '../../components/Controls/Checkbox';
 import {
   CheckboxFieldValues,
   FormBuilderProps,
@@ -22,10 +22,10 @@ import {DatePicker} from '../Inputs/DatePicker';
 import {BaseInputForm} from './BaseInputForm';
 import {BaseInputProps} from '../Inputs/BaseInputs';
 import {SelectPickerProps} from '../SelectPicker/types';
-import {styling} from '@/Theme/Styles/GlobalStyles';
-import {SelectorInput} from '@/Components/FormBuilder/SelectorInput';
-import {PinInput} from '../../Components/Inputs/PinInput';
-import {Typography} from '@/Components/Typography';
+import {styling} from '../../Theme/Styles/GlobalStyles';
+import {SelectorInput} from '../../components/FormBuilder/SelectorInput';
+import {PinInput} from '../../components/Inputs/PinInput';
+import {Typography} from '../../components/Typography';
 
 const FormValuesGrabber = ({
   onValuesChange,
@@ -59,11 +59,7 @@ export function FormBuilder<ReturnType extends FieldValues>({
   const AdditionalButton = additionalButton;
 
   return (
-    <Formik
-      innerRef={formRef}
-      initialValues={initialValues}
-      validateOnMount
-      onSubmit={values => {
+    <Formik innerRef={formRef} initialValues={initialValues} validateOnMount onSubmit={values => {
         resetFocusAll();
         onSubmit(values as ReturnType);
       }}

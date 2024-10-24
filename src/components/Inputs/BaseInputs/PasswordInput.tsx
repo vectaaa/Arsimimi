@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { PressableOpacity } from '@/Components/Buttons/PressableOpacity';
-import { GLOBALS } from '@/Constants/Globals';
-import { PASS_MAX_LENGTH } from '@/Constants/Validation';
-import { Icons } from '@/Theme/Icons';
+import { PressableOpacity } from '../../Buttons/PressebleOpacity';
+// import { GLOBALS } from '../../../Constants/Globals';
+import { PASS_MAX_LENGTH } from '../../../Constants/Validation';
+// import { Icons } from '../../../Theme/Icons';
 import { BaseInput, BaseInputProps } from './index';
 import { stylesInput } from '../styles';
 
@@ -41,9 +41,11 @@ export const PasswordInput = ({ label, withoutError, error, ...props }: BaseInpu
           testingSuffix={`${label || t('forms.password.label')} Toggle Password Visibility Button`}
         >
           {passwordHidden ? (
-            <Icons.PasswordHidden {...GLOBALS.ICON_SIZE} />
+            <Text>Hidden</Text>
+            // <Icons.PasswordHidden width={24} height={24} />
           ) : (
-            <Icons.PasswordVisible {...GLOBALS.ICON_SIZE} />
+            <Text>Visible</Text>
+            // <Icons.PasswordVisible width={24} height={24} />
           )}
         </PressableOpacity>
       </View>

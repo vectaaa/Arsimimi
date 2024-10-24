@@ -3,4 +3,6 @@ export const IMAGES = {
     ONBOARDING2: require('../assets/images/sliderimg2.png'),
     ONBOARDING3: require('../assets/images/sliderimg3.png'),
     ONBOARDING4: require('../assets/images/sliderimg4.png'),
+   FACEBOOKICON:  require('../assets/images/googleIcon.png'),
+   GOOGLEICON: require('../assets/images/facebookIcon.png'),
 };

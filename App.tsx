@@ -1,5 +1,5 @@
 import React from 'react';
-import Navigation from './src/navigation/navigation';
+import Navigation from './src/navigation/RootStackNavigator';
 
 function App() {
   return <Navigation/>;

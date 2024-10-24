@@ -97,7 +97,7 @@ export const layouts = StyleSheet.create({
   },
   /* Sizes Layouts */
   fill: {
-    flex: 1,
+    // flex: 1,
   },
   flexGrow: {
     flexGrow: 1,

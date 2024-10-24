@@ -1,4 +1,5 @@
 export const COLORS = {
+  BORDERBLACK: '#848484',
   BLACK: '#000000',
   WHITE: '#FFFFFF',
   TRANSPARENT: 'rgba(0,0,0,0)',
@@ -56,8 +57,8 @@ export const COLORS = {
   // THRIVE COLORS
 
   //ORANGE
-  ORANGE_LIGHT: '#F9F9EA',
-  ORANGE_NORMAL: '#EBEDBF',
+  ORANGE_LIGHT: '#F2C299',
+  ORANGE_NORMAL: '#D27A24',
 
   //TEAL
   TEAL_LIGHT: '#E6EFEC',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
-import { GLOBALS } from '../../../Constants/Globals';
-import { Icons } from '@/Theme/Icons';
+// import { GLOBALS } from '../../../Constants/Globals';
+// import { Icons } from '../../../Theme/Icons';
 import { BaseInput } from '../BaseInputs/index';
 import { stylesInput } from '../styles';
 
@@ -36,7 +36,7 @@ export const BaseSelectInput = ({
       testingSuffix={`Select ${label}`}
     >
       <View style={[stylesInput.iconWrapper, stylesInput.iconRightWrapper]}>
-        <Icons.ArrowDown {...GLOBALS.ICON_SIZE} />
+        {/* <Icons.ArrowDown {...GLOBALS.ICON_SIZE} /> */}
       </View>
     </BaseInput>
   );

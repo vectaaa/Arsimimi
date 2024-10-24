@@ -10,8 +10,8 @@ import {
   RefreshControl,
 } from 'react-native';
 import { SwipeListView, RowMap } from 'react-native-swipe-list-view';
-import { COLORS } from '@/Theme/Colors';
-import { GLOBALS } from '@/Constants/Globals';
+import { COLORS } from '../../Theme/Colors';
+import { GLOBALS } from '../../Constants/Globals';
 import { BaseEmptyList } from './BaseEmptyList';
 
 type BaseProps = {

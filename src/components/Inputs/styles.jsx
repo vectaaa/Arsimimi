@@ -1,10 +1,12 @@
-import { COLORS } from '@/Theme/Colors';
-import { GLOBALS } from '@/Constants/Globals';
-import { styling } from '@/Theme/Styles/GlobalStyles';
+import { COLORS } from '../../Theme/Colors';
+import { GLOBALS } from '../../Constants/Globals';
+import { styling } from '../../Theme/Styles/GlobalStyles';
 import { StyleSheet } from 'react-native';
 
 export const stylesInput = StyleSheet.create({
   container: {
+    marginLeft: 15,
+    marginRight: 15,
     marginBottom: 5,
     borderRadius: 4,
   },
@@ -20,12 +22,12 @@ export const stylesInput = StyleSheet.create({
   },
   bordered: {
     borderWidth: 1,
-    borderColor: COLORS.WHITE_NORMAL_HOVER,
+    borderColor: COLORS.BORDERBLACK,
   },
   baseTextInput: {
     paddingHorizontal: 12,
     paddingVertical: 12,
-    fontFamily: 'Swiss721BT-Roman',
+    fontFamily: 'georgia',
     fontSize: 14,
     color: COLORS.BLACK_NORMAL,
   },
@@ -37,12 +39,12 @@ export const stylesInput = StyleSheet.create({
     paddingRight: GLOBALS.ICON_SCALE + 16,
   },
   focused: {
-    borderColor: COLORS.TEAL_LIGHT_ACTIVE,
+    borderColor: COLORS.BORDERBLACK,
   },
   iconWrapper: {
     ...styling.absolute,
     ...styling.rowHCenter,
-    paddingHorizontal: 12,
+    paddingHorizontal: 24,
     top: 0,
     bottom: 0,
     overflow: 'visible',
@@ -55,6 +57,9 @@ export const stylesInput = StyleSheet.create({
   },
   inputLabel: {
     marginBottom: 8,
+    marginLeft: 15,
+    color: '#848484',
+    fontFamily: 'georgia',
   },
   bottomInfoContainer: {
     ...styling.row,
@@ -69,6 +74,7 @@ export const stylesInput = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 6,
     borderColor: COLORS.NEUTRAL_200,
+    marginLeft: 15,
   },
   boxInputContainer: {
     padding: 16,
@@ -94,19 +100,20 @@ export const stylesInput = StyleSheet.create({
   errorContainer: {
     borderColor: COLORS.RED_NORMAL,
     elevation: 3,
-    shadowColor: COLORS.RED_NORMAL,
+    // shadowColor: COLORS.RED_NORMAL,
     shadowOffset: {
       width: 0,
       height: 0,
     },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
+    shadowOpacity: 0.5,
+    // shadowRadius: 1,
     borderWidth: 1,
-    backgroundColor: COLORS.RED_LIGHT,
+    backgroundColor: COLORS.TRANSPARENT,
   },
   errorText: {
-    marginLeft: 10,
-    flex: 1,
+    color: 'black',
+    marginLeft: 0,
+    fontFamily: 'georgia',
   },
   bottomButton: {
     marginLeft: 10,
@@ -127,6 +134,7 @@ export const stylesInput = StyleSheet.create({
   },
 
   hintText: {
-    paddingHorizontal: 8,
+    paddingHorizontal: 30,
+    
   },
 });

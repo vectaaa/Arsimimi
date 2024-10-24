@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TextInputProps, View } from 'react-native';
-import { Icons } from '@/Theme/Icons';
-import { formatDatePickerDate } from '@/Utils/momentum';
-import { DatePickerModal } from '../Modals/DatePickerModal';
+// import { Icons } from '../../Theme/Icons';
+import { formatDatePickerDate } from '../../Utils/momentum';
+// import { DatePickerModal } from '../Modals/DatePickerModal';
 import { BaseInput } from './BaseInputs';
-import { stylesInput } from '../../Components/Inputs/styles';
+import { stylesInput } from '../../components/Inputs/styles';
 
 export type DatePickerProps = TextInputProps & {
   value: string;
@@ -19,28 +19,28 @@ export type DatePickerProps = TextInputProps & {
 
 export const DatePicker = ({
   value,
-  onChangeDate,
-  minDate,
-  maxDate = new Date(),
-  onClose,
+  // onChangeDate,
+  // minDate,
+  // maxDate = new Date(),
+  // onClose,
   editable = true,
   ...restProps
 }: DatePickerProps) => {
-  const [showDatePicker, setShowDatePicker] = useState(false);
+  // const [showDatePicker, setShowDatePicker] = useState(false);
 
-  const handleDateOpen = () => setShowDatePicker(true);
+  // const handleDateOpen = () => setShowDatePicker(true);
 
-  const handleDateClose = () => {
-    setShowDatePicker(false);
-    onClose();
-  };
+  // const handleDateClose = () => {
+  //   setShowDatePicker(false);
+  //   onClose();
+  // };
 
   const date = editable ? formatDatePickerDate(value) : value;
   return (
     <>
       <BaseInput
         pressable={true}
-        onPress={handleDateOpen}
+        // onPress={handleDateOpen}
         value={date}
         pointerEvents="none"
         onChangeText={() => {}}
@@ -50,10 +50,10 @@ export const DatePicker = ({
         {...restProps}
       >
         <View style={[stylesInput.iconWrapper, stylesInput.iconRightWrapper]}>
-          <Icons.Calendar width={40} />
+          {/* <Icons.Calendar width={40} /> */}
         </View>
       </BaseInput>
-      {showDatePicker && (
+      {/* {showDatePicker && (
         <DatePickerModal
           value={value}
           isOpen={showDatePicker}
@@ -62,7 +62,7 @@ export const DatePicker = ({
           minimumDate={minDate}
           maximumDate={maxDate}
         />
-      )}
+      )} */}
     </>
   );
 };

@@ -110,7 +110,7 @@ const OnboardingScreen = ({ navigation }) => {
                         <View style={styles.buttonGetStarted}>
                             <TouchableOpacity
                                 style={styles.btn}
-                                onPress={() => navigation.replace('LoginScreen')}>
+                                onPress={() => navigation.replace('Register')}>
                                 <Text style={styles.loginText}>Login</Text>
                             </TouchableOpacity>
                         </View>

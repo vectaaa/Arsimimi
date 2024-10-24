@@ -1,7 +1,7 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
-import {BaseSelectInput} from '../Components/Inputs/BaseInputs/BaseSelectInput';
+import {BaseSelectInput} from '../../components/Inputs/BaseInputs/BaseSelectInput';
 import {SelectPickerModal} from './SelectPickerModal';
 import {SelectPickerProps} from './types';
 

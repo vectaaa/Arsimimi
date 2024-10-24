@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, TextInput, StyleProp, TextStyle, TextInputProps } from 'react-native';
 import { COLORS } from '../../../Theme/Colors';
-import { PressableOpacity } from '../Components/Buttons/PressableOpacity';
+import { PressableOpacity } from '../../../components/Buttons/PressebleOpacity';
 import { stylesInput } from '../styles';
-import { Typography } from '@/Components/Typography';
-import { styling } from '@/Theme/Styles/GlobalStyles';
-import { Icons } from '@/Theme/Icons';
-import { Spacer } from '@/Components/Spacer';
+import { Typography } from '../../../components/Typography';
+import { styling } from '../../../Theme/Styles/GlobalStyles';
+import { Icons } from '../../../Theme/Icons';
+import { Spacer } from '../../../components/Spacer';
 
 export type BaseInputProps = Omit<TextInputProps, 'onChangeText'> & {
   onChangeText: (text: string) => void;
@@ -67,7 +67,10 @@ export const BaseInput = ({
     return (
       <View style={stylesInput.bottomInfoContainer}>
         <View style={stylesInput.hint}>
-          {infoWithIcon && <Icons.Info />}
+          {
+          infoWithIcon && 
+          <Icons.Info />
+          }
           <Typography color={COLORS.WHITE_DARK_ACTIVE} size={12} style={stylesInput.hintText}>
             {info || ''}
           </Typography>
