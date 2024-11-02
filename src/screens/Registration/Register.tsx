@@ -23,7 +23,7 @@ type FormFields = {
   password: string;
   confirmpassword: string;
 };
-export const Register = ({}: AuthStackScreenProps<'Register'>) => {
+export const Register = ({navigation}: AuthStackScreenProps<'Register'>) => {
   // Get the width of the screen
   const {width, height} = Dimensions.get('window');
   // Calculate the screen diagonal size in inches
@@ -32,8 +32,10 @@ export const Register = ({}: AuthStackScreenProps<'Register'>) => {
   const formRef = useFormRef<FormFields>();
 
   //Where the initiate registration starts
-  const onSubmit = (navigation) => {
-    navigation.navigate('LoginScreen')
+  const onSubmit = (values: FormFields) => {
+    console.log(values, 'form values');
+    navigation.navigate('ConfirmEmail');
+
   };
 
   const registerSchema = object({
@@ -42,9 +44,9 @@ export const Register = ({}: AuthStackScreenProps<'Register'>) => {
     confirmpassword: VALIDATION.confirmPassword,
   });
 
-  const handleLoginNavigation = (navigation) => {
+  const handleLoginNavigation = () => {
     navigation.navigate('LoginScreen');
-  }
+  };
 
   const formFields: Field[] = [
     {
@@ -108,7 +110,6 @@ export const Register = ({}: AuthStackScreenProps<'Register'>) => {
                 submitButtonText="Continue"
                 submitButtonStyle={styles.buttonContainer}
                 validationSchema={registerSchema}
-                
               />
               <View style={styles.arrange1}>
                 <View style={styles.lineDesign} />
@@ -181,7 +182,9 @@ export const Register = ({}: AuthStackScreenProps<'Register'>) => {
           </View>
           <View style={styles.arrange3}>
             <Text style={styles.textlog2}>I have an account? </Text>
-            <Text style={styles.textlog3}> Sign In</Text>
+            <PressableOpacity testingSuffix={''} onPress={handleLoginNavigation}>
+                <Text style={styles.textlog3}> Sign In</Text>
+                </PressableOpacity>
           </View>
         </SafeAreaView>
       )}

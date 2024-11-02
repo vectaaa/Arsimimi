@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
         marginBottom: 16,
       },
       cell: {
-        borderColor: COLORS.WHITE_NORMAL_HOVER,
+        borderColor: COLORS.ORANGE_LIGHT,
         borderWidth: 1.5,
         borderRadius: 4,
         height: 48,
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
       },
       text: {
         alignSelf: 'center',
-        backgroundColor: COLORS.WHITE_LIGHT,
+        backgroundColor: COLORS.TRANSPARENT,
         fontFamily: 'Swiss721BT-Roman',
         fontSize: 14,
         textAlign: 'center',
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
       },
       innerActiveCell: {
         borderWidth: 1,
-        borderColor: COLORS.TEAL_NORMAL,
+        borderColor: COLORS.ORANGE_LIGHT,
         borderRadius: 4,
         height: 46,
         width: 46,
@@ -139,15 +139,15 @@ const styles = StyleSheet.create({
         borderColor: COLORS.RED_NORMAL,
       },
       focusedCell: {
-        borderColor: withOpacity(COLORS.BLACK, 0.2),
+        borderColor: withOpacity(COLORS.ORANGE_NORMAL, 0.2),
         elevation: 3,
-        shadowColor: COLORS.SHADOW,
+        shadowColor: COLORS.ORANGE_LIGHT,
         shadowOffset: { width: 0, height: 0 },
         shadowRadius: 2,
         shadowOpacity: 0.2,
       },
       cellEntered: {
-        borderColor: COLORS.TEAL_LIGHT_ACTIVE,
+        borderColor: COLORS.ORANGE_NORMAL,
       },
       errorMessage: { paddingTop: 2, paddingLeft: 2, fontSize: 12, color: COLORS.RED_NORMAL },
 });

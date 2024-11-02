@@ -23,7 +23,9 @@ export type BaseInputSubTypes =
   | undefined
   | 'email'
   | 'password'
-  | 'confirmpassword';
+  | 'confirmpassword'
+  | 'fullname'
+  | 'agerange';
 export type BaseInputFormProps = BaseInputProps & {
   subtype?: BaseInputSubTypes;
 };

@@ -58,14 +58,24 @@ export const styles = StyleSheet.create({
   lineDesign: {
     borderBottomWidth: 1,  // 1px border
     borderColor: '#848484',   // Line color (you can change it)
-    width: 122, 
+    width: 122,
   },
   container: {
     paddingTop: 20,
     justifyContent: 'center',
+    alignContent: 'center',
     // alignItems: 'center',
     paddingLeft: 15,
     paddingHorizontal: 5,
+    // backgroundColor: '#fff',
+  },
+  container2: {
+    paddingTop: 20,
+    justifyContent: 'center',
+    alignContent: 'center',
+    paddingHorizontal: 5,
+    paddingLeft: 15,
+    paddingRight: 15,
     // backgroundColor: '#fff',
   },
   //   textContainer: {
@@ -86,6 +96,12 @@ export const styles = StyleSheet.create({
     fontWeight: '400', // Bold text for emphasis
     color: '#A35200', // Use a prominent color
   },
+  digitText: {
+    fontFamily: 'georgia',
+    fontSize: 17, // Larger font size for visibility
+    fontWeight: '400', // Bold text for emphasis
+    color: '#848484', // Use a prominent color
+  },
   demacation: {
     fontFamily: 'georgiab',
     fontSize: 17, // Match the size of studentText
@@ -105,7 +121,7 @@ export const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     paddingBottom: 40,
-    paddingTop: 30
+    // paddingTop: 10
 
     // alignItems: 'center',
   },
@@ -115,11 +131,11 @@ export const styles = StyleSheet.create({
 //     alignContent: 'center'
 //   },
 buttonContainer: {
-    width: '92%',               // Set width to match the input fields
-    alignSelf: 'center',        // Centers the button horizontally within its container
-    justifyContent: 'center',   // Centers the content inside the button
-    paddingVertical: 5,        // Add padding for the button
-    borderRadius: 5,            // Optional: Add rounded corners
+    width: '92%',               
+    alignSelf: 'center',        
+    justifyContent: 'center',   
+    paddingVertical: 5,        
+    borderRadius: 5,            
     marginHorizontal: 15,
   },
   logintext: {
@@ -129,6 +145,7 @@ buttonContainer: {
   },
   textContainer: {
     paddingTop: 10,
+    paddingBottom: 30,
     flexDirection: 'row',
     // justifyContent: 'center',
     alignItems: 'center',

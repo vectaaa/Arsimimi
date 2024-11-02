@@ -14,6 +14,8 @@ export type RootStackScreenProps <T extends keyof RootStackParamlist> = NativeSt
 export type AuthStackParamList = {
     Onboarding: undefined;
     Register: undefined;
+    ConfirmEmail: undefined;
+    PersonalRegistration: undefined;
     LoginScreen: undefined;
 };
 

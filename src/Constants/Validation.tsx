@@ -6,7 +6,7 @@ import i18n from '../Translations';
 export const FROM_ACC_NAME = 'fromAccount';
 export const ACC_NUMBER_LENGTH = 10;
 export const PHONE_NUMBER_LENGTH = 11;
-export const PASS_MAX_LENGTH = 12;
+export const PASS_MAX_LENGTH = 20;
 const MIN_AMOUNT = 10;
 const ALLOWED_AGE = 18;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
