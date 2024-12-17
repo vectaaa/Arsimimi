@@ -17,6 +17,7 @@ export enum FieldTypes {
   PIN = 'pin',
   CHECKBOX = 'checkbox',
   MODAL_SELECTOR = 'modalSelector',
+  CUSTOM = "CUSTOM",
 }
 
 export type BaseInputSubTypes =

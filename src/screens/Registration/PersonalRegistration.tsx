@@ -1,27 +1,38 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
-import React, { useState } from 'react';
+import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {AuthStackScreenProps} from '../../navigation/types';
 import StageOneIcon from '../../assets/Svg/stage1.svg';
 import {Field, FieldTypes} from '../../components/FormBuilder/types';
-import { FormBuilder } from '../../components/FormBuilder';
-import { useFormRef } from '../../Hooks/formRef';
-import { use } from 'i18next';
+import {FormBuilder} from '../../components/FormBuilder';
+import {useFormRef} from '../../Hooks/formRef';
+import {Checkbox} from '../../components/Controls/Checkbox';
+import {ScrollView} from 'react-native-gesture-handler';
+import ModalSelector from '../../components/ModalSelector';
+
 
 type FormFields = {
-  fullname: string,
-  ageRange: string,
-  guardianEmailAddress: string,
-}
+  fullname: string;
+  ageRange: string;
+  guardianEmailAddress: string;
+};
 const PersonalRegistration = ({
   navigation,
   route,
 }: AuthStackScreenProps<'PersonalRegistration'>) => {
-  const [questions, setQuestions] = useState<Secur
+  const [ageRange, setAgeRange] = useState([]);
 
   const formRef = useFormRef<FormFields>();
 
-  const onSubmit = () => {}
+  const onSubmit = () => {
+    navigation.navigate('LearningProfileOne');
+  };
 
+  const ageRangeOptions = [
+    {label: 'range1', value: '0-12'},
+    {label: 'range2', value: '13-18'},
+    {label: 'range3', value: '18-25'},
+    {label: 'range4', value: '26-Above'},
+  ];
   const formFields: Field[] = [
     {
       type: FieldTypes.BASE_INPUT,
@@ -39,6 +50,14 @@ const PersonalRegistration = ({
       fieldProps: {
         label: 'Select age range',
         placeholder: 'Select age range',
+        options: ageRangeOptions.map((option) => ({
+          ...option,
+          label: option.label, 
+          value: option.value,
+        })),
+        valueField: 'value',
+        itemHeaderFiled: 'label',
+        modalTitle: 'Choose Age Range',
       },
     },
     {
@@ -53,41 +72,59 @@ const PersonalRegistration = ({
   ];
 
   return (
-    <><View style={styles.container3}>
-      <Text style={styles.logintext}>Personal {'\n'}Information</Text>
-      <View style={styles.iconContainer}>
-        <StageOneIcon width={'24'} height={'24'} />
-      </View>
-    </View>
-    <FormBuilder<FormFields> 
-      formRef={formRef}
-      fields={formFields}
-      initialValues={{
-        fullname: '',
-        ageRange: '',
-        guardianEmailAddress: '',
-      }}
-      onSubmit={onSubmit}
-      submitButtonText='Next'
-      submitButtonStyle={styles.buttonContainer}
-      />
-      </>
+    <>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.container3}>
+          <Text style={styles.logintext}>Personal {'\n'}Information</Text>
+          <View style={styles.iconContainer}>
+            <StageOneIcon width={'24'} height={'24'} />
+          </View>
+        </View>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.formContainer}>
+            <FormBuilder<FormFields>
+              formRef={formRef}
+              fields={formFields}
+              initialValues={{
+                fullname: '',
+                ageRange: {} as AgeRange,
+                guardianEmailAddress: '',
+              }}
+              onSubmit={onSubmit}
+              submitButtonText="Next"
+              submitButtonStyle={[styles.buttonContainer]}
+            />
+            <Checkbox
+              isActive={false}
+              onPress={onSubmit}
+              label="I agree to the Terms and Conditions, Privacy Policy and that I’m over 16 or have the permission of a guardian."
+              style={{
+                width: '100%',
+                padding: 20,
+                justifyContent: 'center',
+                alignSelf: 'center',
+              }}
+            />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 };
 
 export default PersonalRegistration;
 
 const styles = StyleSheet.create({
-  container3: {
+  safeArea: {
     flex: 1,
+  },
+  container3: {
     flexDirection: 'row',
     paddingTop: 20,
     justifyContent: 'space-between',
     alignContent: 'center',
-    paddingHorizontal: 5,
     paddingLeft: 15,
-    paddingRight: 15,
-    // backgroundColor: '#fff',
+    paddingHorizontal: 5,
   },
   logintext: {
     fontFamily: 'georgiab',
@@ -97,14 +134,20 @@ const styles = StyleSheet.create({
   iconContainer: {
     margin: 20,
   },
-  personalRegText: {
+  buttonContainer: {
+    width: '92%',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    paddingVertical: 5,
+    borderRadius: 5,
+    marginHorizontal: 15,
+  },
+  formContainer: {
     flex: 1,
-    // flexDirection: 'row',
-    // justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingTop: 20,
-    paddingHorizontal: 5,
-    paddingLeft: 15,
-    paddingRight: 15,
+    flexDirection: 'column',
+    width: '100%',
+    justifyContent: 'center',
+    paddingBottom: '100%',
+    marginTop: 20,
   },
 });

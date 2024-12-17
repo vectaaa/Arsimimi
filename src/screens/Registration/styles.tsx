@@ -121,21 +121,14 @@ export const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     paddingBottom: 40,
-    // paddingTop: 10
-
-    // alignItems: 'center',
   },
-//   buttonContainer: {
-//     width: '90%',
-//     alignSelf: 'center',
-//     alignContent: 'center'
-//   },
+
 buttonContainer: {
-    width: '92%',               
-    alignSelf: 'center',        
-    justifyContent: 'center',   
-    paddingVertical: 5,        
-    borderRadius: 5,            
+    width: '92%',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    paddingVertical: 5,
+    borderRadius: 5,
     marginHorizontal: 15,
   },
   logintext: {

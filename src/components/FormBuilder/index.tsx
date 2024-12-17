@@ -53,13 +53,18 @@ export function FormBuilder<ReturnType extends FieldValues>({
   additionalButton,
   buttonLocation = 'bottom',
   containerStyle,
+  render,
 }: FormBuilderProps<ReturnType>) {
   const {focusState, setFieldFocus, resetFieldFocus, resetFocusAll} =
     useInputFocus(fields);
   const AdditionalButton = additionalButton;
 
   return (
-    <Formik innerRef={formRef} initialValues={initialValues} validateOnMount onSubmit={values => {
+    <Formik
+      innerRef={formRef}
+      initialValues={initialValues}
+      validateOnMount
+      onSubmit={values => {
         resetFocusAll();
         onSubmit(values as ReturnType);
       }}
@@ -110,10 +115,25 @@ export function FormBuilder<ReturnType extends FieldValues>({
                         {...(fieldProps as BaseInputFormProps)}
                         subtype={subtype as BaseInputSubTypes}
                         value={(values as InputFieldValues)[name]}
-                        onChangeText={(value: string) => setFieldValue(name, value)}
+                        onChangeText={(value: string) =>
+                          setFieldValue(name, value)
+                        }
                       />
                     );
                     break;
+                  // case FieldTypes.CUSTOM:
+                  //   fieldComponent = (
+                  //     <SelectPicker
+                  //       {...(fieldProps as SelectPickerProps<any>)}
+                  //       onPress={() => setFieldTouched(name)}
+                  //       error={commonInputProps.error}
+                  //       selectedValue={(values as SelectorFiledValues)[name]}
+                  //       onChangeSelected={(item: any) =>
+                  //         setFieldValue(name, item)
+                  //       }
+                  //     />
+                  //   )
+                  //   break;
 
                   case FieldTypes.CHECKBOX:
                     fieldComponent = (
@@ -130,12 +150,11 @@ export function FormBuilder<ReturnType extends FieldValues>({
                     fieldComponent = (
                       <SelectPicker
                         {...(fieldProps as SelectPickerProps<any>)}
-                        onPress={() => setFieldTouched(name)}
-                        error={commonInputProps.error}
-                        selectedValue={(values as SelectorFiledValues)[name]}
-                        onChangeSelected={(item: any) =>
-                          setFieldValue(name, item)
-                        }
+                        selectedValue={values[name]} // Current value from the form state
+                        onChangeSelected={(item: any) => {
+                          console.log('Selected Value:', item.value); // Debugging selected value
+                          setFieldValue(name, item.value); // Pass only 'value' to avoid cyclical data
+                        }}
                       />
                     );
                     break;
@@ -173,7 +192,9 @@ export function FormBuilder<ReturnType extends FieldValues>({
                           </Typography>
                         }
                         pin={(values as PinFieldValues)[name]}
-                        onPinChange={(item: string) => setFieldValue(name, item)}
+                        onPinChange={(item: string) =>
+                          setFieldValue(name, item)
+                        }
                         errorMessage={errors[name] as string}
                       />
                     );

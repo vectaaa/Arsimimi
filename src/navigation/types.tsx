@@ -16,6 +16,7 @@ export type AuthStackParamList = {
     Register: undefined;
     ConfirmEmail: undefined;
     PersonalRegistration: undefined;
+    LearningProfileOne: undefined;
     LoginScreen: undefined;
 };
 
