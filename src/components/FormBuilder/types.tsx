@@ -9,6 +9,7 @@ import {SelectPickerProps} from '../SelectPicker/types';
 import {SchoolOperator} from '../../Types/Common/SchoolService';
 import {Classes} from '../../Types/Common/ClassService';
 import {EducationLevelOperator} from '../../Types/Common/EducationService';
+import {DropdownItem} from '../Dropdown';
 
 export enum FieldTypes {
   BASE_INPUT = 'baseInput',
@@ -17,7 +18,8 @@ export enum FieldTypes {
   PIN = 'pin',
   CHECKBOX = 'checkbox',
   MODAL_SELECTOR = 'modalSelector',
-  CUSTOM = "CUSTOM",
+  CUSTOM = 'CUSTOM',
+  DROP_DOWN = 'DROP_DOWN',
 }
 
 export type BaseInputSubTypes =
@@ -49,6 +51,10 @@ export type CheckboxFieldValues = {
 export type SelectorFiledValues = {
   [key: string]: any;
 };
+export type DropDownFieldValues = {
+  [key: string]: string;
+};
+
 export type SchoolSelectorFieldValues = {
   [key: string]: SchoolOperator;
 };
@@ -68,12 +74,13 @@ export type PinFormFieldProps = Omit<
   'descriptionComponent' | 'pin' | 'onPinChange'
 > & {label: string};
 
+
 export type FieldProps<T> = T extends FieldTypes.BASE_INPUT
   ? Omit<BaseInputProps, 'value' | 'onChangeText'>
   : T extends FieldTypes.CHECKBOX
   ? Omit<CheckboxProps, 'isActive' | 'onPress'>
-  : T extends FieldTypes.SELECTOR
-  ? Omit<SelectPickerProps<any>, 'selectedValue' | 'onChangeSelected'>
+  : T extends FieldTypes.SELECTOR | FieldTypes.DROP_DOWN
+  ? Pick<SelectPickerProps<any>, 'options' | 'onSelect' | 'selectedValue'>
   : T extends FieldTypes.PIN
   ? PinFormFieldProps
   : never;
@@ -81,6 +88,7 @@ export type FieldProps<T> = T extends FieldTypes.BASE_INPUT
 export type Field = {
   name: string;
   type: FieldTypes;
+  data?: DropdownItem[];
   subtype?: FieldSubTypes<Field['type']>;
   fieldProps?: FieldProps<Field['type']>;
   component?: ({

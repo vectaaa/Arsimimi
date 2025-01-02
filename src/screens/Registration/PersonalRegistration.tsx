@@ -9,7 +9,6 @@ import {Checkbox} from '../../components/Controls/Checkbox';
 import {ScrollView} from 'react-native-gesture-handler';
 import ModalSelector from '../../components/ModalSelector';
 
-
 type FormFields = {
   fullname: string;
   ageRange: string;
@@ -28,10 +27,10 @@ const PersonalRegistration = ({
   };
 
   const ageRangeOptions = [
-    {label: 'range1', value: '0-12'},
-    {label: 'range2', value: '13-18'},
-    {label: 'range3', value: '18-25'},
-    {label: 'range4', value: '26-Above'},
+    {label: '0-12', value: 'range1'},
+    {label: '13-18', value: 'range2'},
+    {label: '18-25', value: 'range3'},
+    {label: '26 and Above', value: 'range4'},
   ];
   const formFields: Field[] = [
     {
@@ -40,21 +39,16 @@ const PersonalRegistration = ({
       subtype: 'fullname',
       fieldProps: {
         label: 'Name',
-        placeholder: 'Enter your fullname',
+        placeholder: 'Enter your fullname ',
       },
     },
     {
-      type: FieldTypes.MODAL_SELECTOR,
+      type: FieldTypes.DROP_DOWN,
       name: 'ageRange',
-      subtype: 'agerange',
       fieldProps: {
-        label: 'Select age range',
-        placeholder: 'Select age range',
-        options: ageRangeOptions.map((option) => ({
-          ...option,
-          label: option.label, 
-          value: option.value,
-        })),
+        label: 'Select Age Range',
+        placeholder: 'Choose your age range',
+        options: ageRangeOptions,
         valueField: 'value',
         itemHeaderFiled: 'label',
         modalTitle: 'Choose Age Range',
@@ -87,7 +81,7 @@ const PersonalRegistration = ({
               fields={formFields}
               initialValues={{
                 fullname: '',
-                ageRange: {} as AgeRange,
+                ageRange: '',
                 guardianEmailAddress: '',
               }}
               onSubmit={onSubmit}

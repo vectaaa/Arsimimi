@@ -79,5 +79,5 @@ export function SelectPicker<Option>({
       error={error}
       disabled={disabled}
     />
-    )
+    );
 }

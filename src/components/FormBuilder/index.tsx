@@ -26,6 +26,7 @@ import {styling} from '../../Theme/Styles/GlobalStyles';
 import {SelectorInput} from '../../components/FormBuilder/SelectorInput';
 import {PinInput} from '../../components/Inputs/PinInput';
 import {Typography} from '../../components/Typography';
+import DropdownComponent from '../Dropdown';
 
 const FormValuesGrabber = ({
   onValuesChange,
@@ -86,6 +87,7 @@ export function FormBuilder<ReturnType extends FieldValues>({
                 const {
                   name,
                   type,
+                  data,
                   subtype,
                   fieldProps = {},
                   additionalComponent,
@@ -121,19 +123,6 @@ export function FormBuilder<ReturnType extends FieldValues>({
                       />
                     );
                     break;
-                  // case FieldTypes.CUSTOM:
-                  //   fieldComponent = (
-                  //     <SelectPicker
-                  //       {...(fieldProps as SelectPickerProps<any>)}
-                  //       onPress={() => setFieldTouched(name)}
-                  //       error={commonInputProps.error}
-                  //       selectedValue={(values as SelectorFiledValues)[name]}
-                  //       onChangeSelected={(item: any) =>
-                  //         setFieldValue(name, item)
-                  //       }
-                  //     />
-                  //   )
-                  //   break;
 
                   case FieldTypes.CHECKBOX:
                     fieldComponent = (
@@ -150,11 +139,10 @@ export function FormBuilder<ReturnType extends FieldValues>({
                     fieldComponent = (
                       <SelectPicker
                         {...(fieldProps as SelectPickerProps<any>)}
-                        selectedValue={values[name]} // Current value from the form state
-                        onChangeSelected={(item: any) => {
-                          console.log('Selected Value:', item.value); // Debugging selected value
-                          setFieldValue(name, item.value); // Pass only 'value' to avoid cyclical data
-                        }}
+                        selectedValue={values[name]}
+                        onChangeSelected={(item: any) =>
+                          setFieldValue(name, item.value)
+                        }
                       />
                     );
                     break;
@@ -182,6 +170,7 @@ export function FormBuilder<ReturnType extends FieldValues>({
                       />
                     );
                     break;
+
                   case FieldTypes.PIN:
                     fieldComponent = (
                       <PinInput
@@ -199,6 +188,19 @@ export function FormBuilder<ReturnType extends FieldValues>({
                       />
                     );
                     break;
+
+                  case FieldTypes.DROP_DOWN:
+                    fieldComponent = (
+                      <DropdownComponent
+                        {...(fieldProps as SelectPickerProps<any>)}
+                        data={data}
+                        value={values[name]}
+                        onChange={(item: any) => setFieldValue(name, item)} // Handle value change
+                        error={commonInputProps.error}
+                      />
+                    );
+                    break;
+
                   default:
                     break;
                 }

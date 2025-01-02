@@ -1,12 +1,18 @@
 import React from 'react';
-import { View, TextInput, StyleProp, TextStyle, TextInputProps } from 'react-native';
-import { COLORS } from '../../../Theme/Colors';
-import { PressableOpacity } from '../../../components/Buttons/PressebleOpacity';
-import { stylesInput } from '../styles';
-import { Typography } from '../../../components/Typography';
-import { styling } from '../../../Theme/Styles/GlobalStyles';
-import { Icons } from '../../../Theme/Icons';
-import { Spacer } from '../../../components/Spacer';
+import {
+  View,
+  TextInput,
+  StyleProp,
+  TextStyle,
+  TextInputProps,
+} from 'react-native';
+import {COLORS} from '../../../Theme/Colors';
+import {PressableOpacity} from '../../../components/Buttons/PressebleOpacity';
+import {stylesInput} from '../styles';
+import {Typography} from '../../../components/Typography';
+import {styling} from '../../../Theme/Styles/GlobalStyles';
+import {Icons} from '../../../Theme/Icons';
+import {Spacer} from '../../../components/Spacer';
 
 export type BaseInputProps = Omit<TextInputProps, 'onChangeText'> & {
   onChangeText: (text: string) => void;
@@ -27,6 +33,9 @@ export type BaseInputProps = Omit<TextInputProps, 'onChangeText'> & {
   prefixComponent?: React.ReactNode;
   suffixComponent?: React.ReactNode;
   inputField?: React.ReactNode;
+  valueField?: string;
+  itemHeaderFiled?: string;
+  modalTitle?: string;
 };
 
 export const BaseInput = ({
@@ -67,11 +76,11 @@ export const BaseInput = ({
     return (
       <View style={stylesInput.bottomInfoContainer}>
         <View style={stylesInput.hint}>
-          {
-          infoWithIcon && 
-          <Icons.Info />
-          }
-          <Typography color={COLORS.WHITE_DARK_ACTIVE} size={12} style={stylesInput.hintText}>
+          {infoWithIcon && <Icons.Info />}
+          <Typography
+            color={COLORS.WHITE_DARK_ACTIVE}
+            size={12}
+            style={stylesInput.hintText}>
             {info || ''}
           </Typography>
         </View>
@@ -87,9 +96,8 @@ export const BaseInput = ({
         stylesInput.container,
         !withoutError && !!error && stylesInput.errorContainer,
         !editable && stylesInput.disabledInput,
-        isFocused && { borderColor: COLORS.TEAL_LIGHT_ACTIVE },
-      ]}
-    >
+        isFocused && {borderColor: COLORS.TEAL_LIGHT_ACTIVE},
+      ]}>
       {restProps.prefixComponent && restProps.prefixComponent}
       {inputField || (
         <TextInput
@@ -112,8 +120,7 @@ export const BaseInput = ({
       <PressableOpacity
         disabled={!editable}
         onPress={onPress}
-        testingSuffix={`${label || testingSuffix} Press On Input`}
-      >
+        testingSuffix={`${label || testingSuffix} Press On Input`}>
         <View pointerEvents="none">{renderBaseInput()}</View>
 
         {children}
