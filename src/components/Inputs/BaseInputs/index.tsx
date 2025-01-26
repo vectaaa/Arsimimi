@@ -96,7 +96,7 @@ export const BaseInput = ({
         stylesInput.container,
         !withoutError && !!error && stylesInput.errorContainer,
         !editable && stylesInput.disabledInput,
-        isFocused && {borderColor: COLORS.TEAL_LIGHT_ACTIVE},
+        isFocused && {borderColor: COLORS.BORDERBLACK},
       ]}>
       {restProps.prefixComponent && restProps.prefixComponent}
       {inputField || (

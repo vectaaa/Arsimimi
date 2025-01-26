@@ -20,6 +20,7 @@ export enum FieldTypes {
   MODAL_SELECTOR = 'modalSelector',
   CUSTOM = 'CUSTOM',
   DROP_DOWN = 'DROP_DOWN',
+  CHECKBOX_FORM = "CHECKBOX_FORM",
 }
 
 export type BaseInputSubTypes =
@@ -28,6 +29,8 @@ export type BaseInputSubTypes =
   | 'password'
   | 'confirmpassword'
   | 'fullname'
+  | 'otherEducationLevel'
+  | 'school'
   | 'agerange';
 export type BaseInputFormProps = BaseInputProps & {
   subtype?: BaseInputSubTypes;
@@ -74,13 +77,15 @@ export type PinFormFieldProps = Omit<
   'descriptionComponent' | 'pin' | 'onPinChange'
 > & {label: string};
 
-
 export type FieldProps<T> = T extends FieldTypes.BASE_INPUT
   ? Omit<BaseInputProps, 'value' | 'onChangeText'>
   : T extends FieldTypes.CHECKBOX
   ? Omit<CheckboxProps, 'isActive' | 'onPress'>
   : T extends FieldTypes.SELECTOR | FieldTypes.DROP_DOWN
-  ? Pick<SelectPickerProps<any>, 'options' | 'onSelect' | 'selectedValue'>
+  ? Pick<
+      SelectPickerProps<any>,
+      'options' | 'onSelect' | 'selectedValue' | 'onValueChange'
+    >
   : T extends FieldTypes.PIN
   ? PinFormFieldProps
   : never;
@@ -89,7 +94,7 @@ export type Field = {
   name: string;
   type: FieldTypes;
   data?: DropdownItem[];
-  subtype?: FieldSubTypes<Field['type']>;
+  subtype?: FieldSubTypes<Field['type']> | string;
   fieldProps?: FieldProps<Field['type']>;
   component?: ({
     onSelect,

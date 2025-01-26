@@ -1,11 +1,11 @@
-import {StyleSheet, Text, TextStyle, View, ViewStyle} from 'react-native';
-import React, { ReactNode } from 'react';
-import { COLORS } from '../../Theme/Colors';
-import { Typography } from '../../Typography';
-import { PressableOpacity } from '../Buttons/PressebleOpacity';
-import { styling } from '../../Theme/Styles/GlobalStyles';
-import { Spacer } from '../Spacer';
-import { Icons } from '../../Theme/Icons';
+import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
+import React, {ReactNode} from 'react';
+import {COLORS} from '../../Theme/Colors';
+import {Typography} from '../../Typography';
+import {PressableOpacity} from '../Buttons/PressebleOpacity';
+import {styling} from '../../Theme/Styles/GlobalStyles';
+import {Spacer} from '../Spacer';
+import {Icons} from '../../Theme/Icons';
 
 export type CheckboxProps = {
   isActive: boolean;

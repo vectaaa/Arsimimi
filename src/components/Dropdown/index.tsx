@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {Dropdown} from 'react-native-element-dropdown';
+import {COLORS} from '../../Theme/Colors';
 
 export type DropdownItem = {
   label: string;
@@ -10,28 +11,25 @@ export type DropdownItem = {
 type DropdownProps = {
   options: DropdownItem[];
   label: string;
+  value: string | null;
+  onChange: (item: DropdownItem) => void;
 };
 
-const DropdownComponent = ({options, label}: DropdownProps) => {
-  const [value, setValue] = useState<string | null>(null);
+const DropdownComponent = ({
+  options,
+  label,
+  value,
+  onChange,
+}: DropdownProps & {onChange: (item: DropdownItem) => void}) => {
   const [isFocus, setIsFocus] = useState(false);
 
-  const renderLabel = () => {
-    if (value || isFocus) {
-      return (
-        <Text style={[styles.label, isFocus && {color: 'blue'}]}>
-          {label}
-        </Text>
-      );
-    }
-    return null;
-  };
+  const renderLabel = () => <Text style={[styles.label]}>{label}</Text>;
 
   return (
     <View style={styles.container}>
       {renderLabel()}
       <Dropdown
-        style={[styles.dropdown, isFocus && {borderColor: 'blue'}]}
+        style={[styles.dropdown]}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
@@ -43,47 +41,49 @@ const DropdownComponent = ({options, label}: DropdownProps) => {
         valueField="value"
         placeholder={!isFocus ? 'Select item' : '...'}
         searchPlaceholder="Search..."
-        value={value}
+        value={value || null} // Safeguard against undefined
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onChange={item => {
-          setValue(item.value);
+          onChange(item.value);
+          console.log(item.value, 'item');
+          // Call the passed onChange handler
           setIsFocus(false);
         }}
       />
     </View>
   );
 };
-
 export default DropdownComponent;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: COLORS.TRANSPARENT,
     padding: 16,
   },
   dropdown: {
     height: 50,
-    borderColor: 'gray',
+    borderColor: COLORS.BORDERBLACK,
     borderWidth: 0.5,
-    borderRadius: 8,
+    borderRadius: 3,
     paddingHorizontal: 8,
   },
   label: {
-    position: 'absolute',
-    backgroundColor: 'white',
-    left: 22,
-    top: 8,
-    zIndex: 999,
-    paddingHorizontal: 8,
+    backgroundColor: COLORS.TRANSPARENT,
     fontSize: 14,
+    marginBottom: 8,
+    color: '#848484',
+    fontFamily: 'georgia',
   },
   placeholderStyle: {
-    fontSize: 16,
-    color: 'gray',
+    fontSize: 14,
+    color: '#848484',
+    fontFamily: 'georgia',
   },
   selectedTextStyle: {
     fontSize: 16,
+    paddingHorizontal: 8,
+    fontFamily: 'georgia',
   },
   iconStyle: {
     width: 20,
@@ -92,5 +92,6 @@ const styles = StyleSheet.create({
   inputSearchStyle: {
     height: 40,
     fontSize: 16,
+    fontFamily: 'georgia',
   },
 });

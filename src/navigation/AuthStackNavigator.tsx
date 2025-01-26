@@ -9,6 +9,7 @@ import LoginScreen from '../Screens/LoginScreen';
 import ConfirmEmail from '../Screens/Registration/ConfirmEmail';
 import PersonalRegistration from '../Screens/Registration/PersonalRegistration';
 import LearningProfileOne from '../Screens/Registration/LearningProfileOne';
+import LearningProfileTwo from '../Screens/Registration/LearningProfileTwo';
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 
@@ -37,7 +38,7 @@ export const AuthStackNavigator = () => {
 
   // Return null until the app launch state is determined, or show a loader
   if (isAppFirstLaunched === null) {
-    return null; // You can show a loading spinner here if needed
+    return null; // We can loading spinner here if needed
   }
 
   return (
@@ -52,6 +53,7 @@ export const AuthStackNavigator = () => {
         component={PersonalRegistration}
       />
       <Stack.Screen name="LearningProfileOne" component={LearningProfileOne} />
+      <Stack.Screen name="LearningProfileTwo" component={LearningProfileTwo} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
     </Stack.Navigator>
   );

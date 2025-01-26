@@ -26,7 +26,9 @@ import {styling} from '../../Theme/Styles/GlobalStyles';
 import {SelectorInput} from '../../components/FormBuilder/SelectorInput';
 import {PinInput} from '../../components/Inputs/PinInput';
 import {Typography} from '../../components/Typography';
-import DropdownComponent from '../Dropdown';
+import DropdownComponent, { DropdownItem } from '../Dropdown';
+import { DropdownProps } from 'react-native-element-dropdown/lib/typescript/components/Dropdown/model';
+import CheckBoxForm from '../Controls/CheckBoxForm';
 
 const FormValuesGrabber = ({
   onValuesChange,
@@ -134,7 +136,13 @@ export function FormBuilder<ReturnType extends FieldValues>({
                       />
                     );
                     break;
-
+                    case FieldTypes.CHECKBOX_FORM: 
+                      fieldComponent = (
+                        <CheckBoxForm
+                        {...(fieldProps as )}
+                        />
+                      );
+                      break;
                   case FieldTypes.MODAL_SELECTOR:
                     fieldComponent = (
                       <SelectPicker
@@ -188,18 +196,28 @@ export function FormBuilder<ReturnType extends FieldValues>({
                       />
                     );
                     break;
-
                   case FieldTypes.DROP_DOWN:
                     fieldComponent = (
                       <DropdownComponent
-                        {...(fieldProps as SelectPickerProps<any>)}
-                        data={data}
-                        value={values[name]}
-                        onChange={(item: any) => setFieldValue(name, item)} // Handle value change
-                        error={commonInputProps.error}
+                        {...(fieldProps as DropdownProps)}
+                        value={values?.[name]} // Bind value from Formik
+                        onChange={(item: DropdownItem) =>
+                          setFieldValue(name, item.value)
+                        } // Handle change
                       />
                     );
                     break;
+                  // case FieldTypes.DROP_DOWN:
+                  //   fieldComponent = (
+                  //     <DropdownComponent
+                  //       {...(fieldProps as SelectPickerProps<any>)}
+                  //       data={data}
+                  //       value={values[value]}
+                  //       onChange={(item: any) => setFieldValue(value, item.value)} // Handle value change
+                  //       error={commonInputProps.error}
+                  //     />
+                  //   );
+                  //   break;
 
                   default:
                     break;

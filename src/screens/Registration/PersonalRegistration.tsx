@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {AuthStackScreenProps} from '../../navigation/types';
 import StageOneIcon from '../../assets/Svg/stage1.svg';
 import {Field, FieldTypes} from '../../components/FormBuilder/types';
@@ -7,7 +7,6 @@ import {FormBuilder} from '../../components/FormBuilder';
 import {useFormRef} from '../../Hooks/formRef';
 import {Checkbox} from '../../components/Controls/Checkbox';
 import {ScrollView} from 'react-native-gesture-handler';
-import ModalSelector from '../../components/ModalSelector';
 
 type FormFields = {
   fullname: string;
@@ -18,19 +17,20 @@ const PersonalRegistration = ({
   navigation,
   route,
 }: AuthStackScreenProps<'PersonalRegistration'>) => {
-  const [ageRange, setAgeRange] = useState([]);
+  // const [ageRange, setAgeRange] = useState([]);
 
   const formRef = useFormRef<FormFields>();
 
-  const onSubmit = () => {
+  const onSubmit = (values: FormFields) => {
+    console.log(values, 'form 2 values');
     navigation.navigate('LearningProfileOne');
   };
 
   const ageRangeOptions = [
-    {label: '0-12', value: 'range1'},
-    {label: '13-18', value: 'range2'},
-    {label: '18-25', value: 'range3'},
-    {label: '26 and Above', value: 'range4'},
+    {label: '0-12', value: '0-12'},
+    {label: '13-18', value: '13-18'},
+    {label: '18-25', value: '18-25'},
+    {label: '26 and Above', value: '26 and Above'},
   ];
   const formFields: Field[] = [
     {
@@ -44,14 +44,10 @@ const PersonalRegistration = ({
     },
     {
       type: FieldTypes.DROP_DOWN,
-      name: 'ageRange',
+      name: 'ageRange', // Matches the initialValues key
       fieldProps: {
         label: 'Select Age Range',
-        placeholder: 'Choose your age range',
-        options: ageRangeOptions,
-        valueField: 'value',
-        itemHeaderFiled: 'label',
-        modalTitle: 'Choose Age Range',
+        options: ageRangeOptions, // Provide options
       },
     },
     {
@@ -98,6 +94,7 @@ const PersonalRegistration = ({
                 justifyContent: 'center',
                 alignSelf: 'center',
               }}
+              labelStyle={{fontFamily: 'georgia'}}
             />
           </View>
         </ScrollView>

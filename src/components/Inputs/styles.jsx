@@ -1,7 +1,7 @@
-import { COLORS } from '../../Theme/Colors';
-import { GLOBALS } from '../../Constants/Globals';
-import { styling } from '../../Theme/Styles/GlobalStyles';
-import { StyleSheet } from 'react-native';
+import {COLORS} from '../../Theme/Colors';
+import {GLOBALS} from '../../Constants/Globals';
+import {styling} from '../../Theme/Styles/GlobalStyles';
+import {StyleSheet} from 'react-native';
 
 export const stylesInput = StyleSheet.create({
   container: {
@@ -21,7 +21,7 @@ export const stylesInput = StyleSheet.create({
     flex: 1,
   },
   bordered: {
-    borderWidth: 1,
+    borderWidth: 0.6,
     borderColor: COLORS.BORDERBLACK,
   },
   baseTextInput: {
@@ -57,7 +57,7 @@ export const stylesInput = StyleSheet.create({
   },
   inputLabel: {
     marginBottom: 8,
-    marginLeft: 15,
+    marginLeft: 16,
     color: '#848484',
     fontFamily: 'georgia',
   },
@@ -65,6 +65,7 @@ export const stylesInput = StyleSheet.create({
     ...styling.row,
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginLeft: 16,
   },
   bottomAlert: {
     paddingVertical: 12,
@@ -99,13 +100,13 @@ export const stylesInput = StyleSheet.create({
   },
   errorContainer: {
     borderColor: COLORS.RED_NORMAL,
-    elevation: 3,
+    // elevation: 3,
     // shadowColor: COLORS.RED_NORMAL,
     shadowOffset: {
       width: 0,
       height: 0,
     },
-    shadowOpacity: 0.5,
+    // shadowOpacity: 0.5,
     // shadowRadius: 1,
     borderWidth: 1,
     backgroundColor: COLORS.TRANSPARENT,
@@ -135,6 +136,5 @@ export const stylesInput = StyleSheet.create({
 
   hintText: {
     paddingHorizontal: 30,
-    
   },
 });
