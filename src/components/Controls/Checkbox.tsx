@@ -39,7 +39,7 @@ export const Checkbox = ({
       testingSuffix={`Checkmark Container ${label}`}
       style={[
         styling.rowHCenter,
-        styling.componentMargin,
+        // styling.componentMargin,
         checkboxPosition === 'right' && styling.rowReverse,
         style,
       ]}>

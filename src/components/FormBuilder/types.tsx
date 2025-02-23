@@ -20,7 +20,7 @@ export enum FieldTypes {
   MODAL_SELECTOR = 'modalSelector',
   CUSTOM = 'CUSTOM',
   DROP_DOWN = 'DROP_DOWN',
-  CHECKBOX_FORM = "CHECKBOX_FORM",
+  CHECKBOX_FORM = 'CHECKBOX_FORM',
 }
 
 export type BaseInputSubTypes =
@@ -31,6 +31,7 @@ export type BaseInputSubTypes =
   | 'fullname'
   | 'otherEducationLevel'
   | 'school'
+  | 'largeText'
   | 'agerange';
 export type BaseInputFormProps = BaseInputProps & {
   subtype?: BaseInputSubTypes;
@@ -47,7 +48,12 @@ export type FieldValues = {
 export type InputFieldValues = {
   [key: string]: string;
 };
+
 export type CheckboxFieldValues = {
+  [key: string]: boolean;
+};
+
+export type CheckboxFormFieldValues = {
   [key: string]: boolean;
 };
 

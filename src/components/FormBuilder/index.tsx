@@ -15,6 +15,7 @@ import {
   BaseInputSubTypes,
   PinFieldValues,
   PinFormFieldProps,
+  CheckboxFormFieldValues,
 } from './types';
 import {SelectPicker} from '../SelectPicker/index';
 import {useInputFocus} from '../../Hooks/input';
@@ -26,9 +27,9 @@ import {styling} from '../../Theme/Styles/GlobalStyles';
 import {SelectorInput} from '../../components/FormBuilder/SelectorInput';
 import {PinInput} from '../../components/Inputs/PinInput';
 import {Typography} from '../../components/Typography';
-import DropdownComponent, { DropdownItem } from '../Dropdown';
-import { DropdownProps } from 'react-native-element-dropdown/lib/typescript/components/Dropdown/model';
-import CheckBoxForm from '../Controls/CheckBoxForm';
+import DropdownComponent, {DropdownItem} from '../Dropdown';
+import {DropdownProps} from 'react-native-element-dropdown/lib/typescript/components/Dropdown/model';
+import CheckBoxForm, {CheckBoxFormProps} from '../Controls/CheckBoxForm';
 
 const FormValuesGrabber = ({
   onValuesChange,
@@ -136,13 +137,17 @@ export function FormBuilder<ReturnType extends FieldValues>({
                       />
                     );
                     break;
-                    case FieldTypes.CHECKBOX_FORM: 
-                      fieldComponent = (
-                        <CheckBoxForm
-                        {...(fieldProps as )}
-                        />
-                      );
-                      break;
+                  case FieldTypes.CHECKBOX_FORM:
+                    fieldComponent = (
+                      <CheckBoxForm
+                        {...(fieldProps as CheckBoxFormProps)}
+                        options={(fieldProps as CheckBoxFormProps).options}
+                        onSelectionChange={selected =>
+                          setFieldValue(name, selected)
+                        }
+                      />
+                    );
+                    break;
                   case FieldTypes.MODAL_SELECTOR:
                     fieldComponent = (
                       <SelectPicker
@@ -200,10 +205,10 @@ export function FormBuilder<ReturnType extends FieldValues>({
                     fieldComponent = (
                       <DropdownComponent
                         {...(fieldProps as DropdownProps)}
-                        value={values?.[name]} // Bind value from Formik
+                        value={values?.[name]}
                         onChange={(item: DropdownItem) =>
                           setFieldValue(name, item.value)
-                        } // Handle change
+                        }
                       />
                     );
                     break;

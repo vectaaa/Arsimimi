@@ -10,6 +10,7 @@ type FormFields = {
   school: string;
   educationLevel: string;
   class: string;
+  examType: string;
 };
 
 const LearningProfileOne = ({
@@ -24,8 +25,15 @@ const LearningProfileOne = ({
     {label: 'Other...', value: 'Other...'},
   ];
 
+  const examTypeOptions = [
+    'Primary School',
+    'Junior Secondary School',
+    'Senior Secondary School',
+    'Professional Exam',
+  ];
+
   const onSubmit = (values: FormFields) => {
-    console.log(values, 'form 2 values');
+    console.log(values, 'form  values');
     navigation.navigate('LearningProfileTwo');
   };
 
@@ -37,12 +45,13 @@ const LearningProfileOne = ({
       subtype: 'school',
       fieldProps: {
         label: 'School / Institution',
-        placeholder: 'Enter your school/institution',
+        placeholder: 'Enter your school/institution ',
       },
     },
     {
       type: FieldTypes.DROP_DOWN,
       name: 'educationLevel',
+      subtype: 'educationLevel',
       fieldProps: {
         label: 'Educational Level',
         options: educationLevelOptions,
@@ -59,12 +68,11 @@ const LearningProfileOne = ({
       },
     },
     {
-      type: FieldTypes.CHECKBOX,
-      name: '',
-      subtype: '',
+      type: FieldTypes.CHECKBOX_FORM,
+      name: 'examType',
       fieldProps: {
-        label: '',
-        placeholder: '',
+        label: 'Preferred Exam Types',
+        options: examTypeOptions,
       },
     },
   ];
@@ -125,7 +133,7 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     paddingBottom: '100%',
-    marginTop: 20,
+    marginTop: 32,
   },
   buttonContainer: {
     width: '92%',

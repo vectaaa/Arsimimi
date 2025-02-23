@@ -2,6 +2,7 @@ export const COLORS = {
   BORDERBLACK: '#848484',
   BLACK: '#000000',
   WHITE: '#FFFFFF',
+  BORDERGREY: '#A7A7A7',
   TRANSPARENT: 'rgba(0,0,0,0)',
   //NEUTRAL
   NEUTRAL_100: '#F3F4F6',

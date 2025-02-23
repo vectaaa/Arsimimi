@@ -1,46 +1,52 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {Checkbox} from './Checkbox';
-
+import {COLORS} from '../../Theme/Colors';
 
 export type CheckBoxFormProps = {
-  level: string;
+  label: string;
+  options: string[];
+  onSelectionChange?: (selected: string) => void;
 };
 
-const CheckBoxForm = (label: string) => {
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+const CheckBoxForm: React.FC<CheckBoxFormProps> = ({
+  label,
+  options,
+  onSelectionChange,
+}) => {
+  const [selectedItems, setSelectedItems] = useState<string>('');
 
-  const checkboxFields: CheckBoxFormProps[] = [
-    {level: 'Primary School'},
-    {level: 'Junior Secondary School'},
-    {level: 'Senior Secondary School'},
-    {level: 'Professional Exam'},
-  ];
-
-  const handleCheckboxPress = (item: CheckBoxFormProps) => {
-    if (selectedItems.includes(item.level)) {
-      setSelectedItems(selectedItems.filter(level => level !== item.level));
+  const handleCheckboxPress = (item: string) => {
+    if (selectedItems.includes(item)) {
+      setSelectedItems('');
+      onSelectionChange && onSelectionChange('');
     } else {
-      setSelectedItems([...selectedItems, item.level]);
+      setSelectedItems(item);
+      onSelectionChange && onSelectionChange(item);
     }
   };
 
   return (
     <View>
-      <Text>{label}</Text>
+      <Text style={styles.labelStyle}>{label}</Text>
       <View style={styles.container}>
         <FlatList
-          data={checkboxFields}
-          renderItem={({item}) => (
-            <View style={styles.innerContainer}>
-              <Checkbox
-                onPress={() => handleCheckboxPress(item)}
-                isActive={selectedItems.includes(item.level)}
-              />
-              <Text>{item.level}</Text>
+          data={options}
+          renderItem={({item, index}) => (
+            <View style={styles.seperatorSpace}>
+              <View style={styles.innerContainer}>
+                <Checkbox
+                  onPress={() => handleCheckboxPress(item)}
+                  isActive={selectedItems.includes(item)}
+                />
+                <Text style={styles.textStyle}>{item}</Text>
+              </View>
+              {index !== options.length - 1 && (
+                <View style={styles.separator} />
+              )}
             </View>
           )}
-          keyExtractor={item => item.level}
+          keyExtractor={item => item}
         />
       </View>
     </View>
@@ -51,13 +57,35 @@ export default CheckBoxForm;
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    gap: 8,
+    flex: 1,
     borderWidth: 0.6,
     borderRadius: 4,
+    marginHorizontal: 12,
+    marginVertical: 12,
+    borderColor: COLORS.BORDERGREY,
   },
   innerContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+  },
+  seperatorSpace: {},
+  labelStyle: {
+    marginHorizontal: 14,
+    color: COLORS.BORDERBLACK,
+    fontFamily: 'georgia',
+    fontWeight: '400',
+  },
+  textStyle: {
+    color: COLORS.BORDERBLACK,
+    fontFamily: 'georgia',
+    fontWeight: '400',
+    marginLeft: 10,
+  },
+  separator: {
+    height: 1,
+    width: '100%',
+    backgroundColor: COLORS.BORDERGREY,
   },
 });

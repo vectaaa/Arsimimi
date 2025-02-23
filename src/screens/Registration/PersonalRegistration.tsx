@@ -39,7 +39,7 @@ const PersonalRegistration = ({
       subtype: 'fullname',
       fieldProps: {
         label: 'Name',
-        placeholder: 'Enter your fullname ',
+        placeholder: 'Enter fullname ',
       },
     },
     {
