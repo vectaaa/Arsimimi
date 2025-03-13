@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   textStyle: {
-    color: COLORS.BORDERBLACK,
+    color: COLORS.ORANGE_THICK,
     fontFamily: 'georgia',
     fontWeight: '400',
     marginLeft: 10,

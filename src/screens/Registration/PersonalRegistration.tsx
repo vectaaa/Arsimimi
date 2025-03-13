@@ -1,24 +1,22 @@
-import {StyleSheet, Text, View, SafeAreaView} from 'react-native';
+import {StyleSheet, Text, View, SafeAreaView, FlatList} from 'react-native';
 import React from 'react';
 import {AuthStackScreenProps} from '../../navigation/types';
 import StageOneIcon from '../../assets/Svg/stage1.svg';
 import {Field, FieldTypes} from '../../components/FormBuilder/types';
 import {FormBuilder} from '../../components/FormBuilder';
 import {useFormRef} from '../../Hooks/formRef';
-import {Checkbox} from '../../components/Controls/Checkbox';
-import {ScrollView} from 'react-native-gesture-handler';
 
 type FormFields = {
   fullname: string;
   ageRange: string;
   guardianEmailAddress: string;
+  agree: boolean;
 };
+
 const PersonalRegistration = ({
   navigation,
   route,
 }: AuthStackScreenProps<'PersonalRegistration'>) => {
-  // const [ageRange, setAgeRange] = useState([]);
-
   const formRef = useFormRef<FormFields>();
 
   const onSubmit = (values: FormFields) => {
@@ -32,6 +30,7 @@ const PersonalRegistration = ({
     {label: '18-25', value: '18-25'},
     {label: '26 and Above', value: '26 and Above'},
   ];
+
   const formFields: Field[] = [
     {
       type: FieldTypes.BASE_INPUT,
@@ -44,10 +43,10 @@ const PersonalRegistration = ({
     },
     {
       type: FieldTypes.DROP_DOWN,
-      name: 'ageRange', // Matches the initialValues key
+      name: 'ageRange',
       fieldProps: {
         label: 'Select Age Range',
-        options: ageRangeOptions, // Provide options
+        options: ageRangeOptions,
       },
     },
     {
@@ -55,22 +54,40 @@ const PersonalRegistration = ({
       name: 'guardianEmailAddress',
       subtype: 'email',
       fieldProps: {
-        label: 'Guardian’s Email Address',
-        placeholder: 'Enter you email address',
+        label: 'Guardian’s Email Address ',
+        placeholder: 'Enter your email address  ',
+      },
+    },
+    {
+      type: FieldTypes.CHECKBOX,
+      name: 'agree',
+      fieldProps: {
+        label:
+          'I agree to the Terms and Conditions, Privacy Policy and that I’m over 16 or have the permission of a guardian.',
+        style: {
+          width: '100%',
+          padding: 20,
+          justifyContent: 'center',
+          alignSelf: 'center',
+        },
+        labelStyle: {fontFamily: 'georgia'},
       },
     },
   ];
 
   return (
-    <>
-      <SafeAreaView style={styles.safeArea}>
-        <View style={styles.container3}>
-          <Text style={styles.logintext}>Personal {'\n'}Information</Text>
-          <View style={styles.iconContainer}>
-            <StageOneIcon width={'24'} height={'24'} />
-          </View>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container3}>
+        <Text style={styles.logintext}>Personal{'\n'}Information</Text>
+        <View style={styles.iconContainer}>
+          <StageOneIcon width={24} height={24} />
         </View>
-        <ScrollView showsVerticalScrollIndicator={false}>
+      </View>
+
+      {/* Wrap the entire form in a FlatList to leverage virtualization */}
+      <FlatList
+        data={[]} // no data items needed
+        ListHeaderComponent={
           <View style={styles.formContainer}>
             <FormBuilder<FormFields>
               formRef={formRef}
@@ -79,27 +96,18 @@ const PersonalRegistration = ({
                 fullname: '',
                 ageRange: '',
                 guardianEmailAddress: '',
+                agree: false,
               }}
               onSubmit={onSubmit}
               submitButtonText="Next"
               submitButtonStyle={[styles.buttonContainer]}
             />
-            <Checkbox
-              isActive={false}
-              onPress={onSubmit}
-              label="I agree to the Terms and Conditions, Privacy Policy and that I’m over 16 or have the permission of a guardian."
-              style={{
-                width: '100%',
-                padding: 20,
-                justifyContent: 'center',
-                alignSelf: 'center',
-              }}
-              labelStyle={{fontFamily: 'georgia'}}
-            />
           </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+        }
+        ListFooterComponent={<View style={{height: 50}} />} // extra spacing if needed
+        contentContainerStyle={{paddingBottom: 100}}
+      />
+    </SafeAreaView>
   );
 };
 
@@ -138,7 +146,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     width: '100%',
     justifyContent: 'center',
-    paddingBottom: '100%',
-    marginTop: 20,
+    marginTop: 32,
   },
 });

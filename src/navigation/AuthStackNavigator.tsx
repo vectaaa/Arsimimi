@@ -5,11 +5,13 @@ import {Register} from '../Screens/Registration/Register';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useEffect, useState} from 'react';
 import OnboardingScreen from '../Screens/OnboardingScreen';
-import LoginScreen from '../Screens/LoginScreen';
+import { LoginScreen } from '../Screens/LoginScreen';
+// import LoginScreen from '../Screens/LoginScreen';
 import ConfirmEmail from '../Screens/Registration/ConfirmEmail';
 import PersonalRegistration from '../Screens/Registration/PersonalRegistration';
 import LearningProfileOne from '../Screens/Registration/LearningProfileOne';
 import LearningProfileTwo from '../Screens/Registration/LearningProfileTwo';
+import LearningTime from '../Screens/Registration/LearningTime';
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 
@@ -54,6 +56,7 @@ export const AuthStackNavigator = () => {
       />
       <Stack.Screen name="LearningProfileOne" component={LearningProfileOne} />
       <Stack.Screen name="LearningProfileTwo" component={LearningProfileTwo} />
+      <Stack.Screen name="LearningTime" component={LearningTime} />
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
     </Stack.Navigator>
   );

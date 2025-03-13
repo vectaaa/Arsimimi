@@ -11,12 +11,8 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styling} from '../../Theme/Styles/GlobalStyles';
 import {IMAGES} from '../../Theme/Images';
-import { PressableOpacity } from '../../components/Buttons/PressebleOpacity';
-// import { Icons } from '../../Theme/Icons';
-// import { Image } from 'react-native-reanimated/lib/typescript/Animated';
-// import GoogleIcon from '../../assets/images/googleIcon.png';
+import {PressableOpacity} from '../../components/Buttons/PressebleOpacity';
 
-// import {AuthScreen} from '../../components/Screen/AuthScreen';
 
 type FormFields = {
   emailAddress: string;
@@ -35,7 +31,6 @@ export const Register = ({navigation}: AuthStackScreenProps<'Register'>) => {
   const onSubmit = (values: FormFields) => {
     console.log(values, 'form values');
     navigation.navigate('ConfirmEmail');
-
   };
 
   const registerSchema = object({
@@ -78,83 +73,81 @@ export const Register = ({navigation}: AuthStackScreenProps<'Register'>) => {
     },
   ];
 
-  
-    const renderHeader = () => (
-      <View style={styles.container}>
-        <Text style={styles.logintext}>Hey, {'\n'}Register Now!</Text>
-        <View style={styles.textContainer}>
-          <Text style={styles.studentText}>Student</Text>
-          <Text style={styles.demacation}>/</Text>
-          <Text style={styles.guardianText}>Guardian</Text>
-        </View>
+  const renderHeader = () => (
+    <View style={styles.container}>
+      <Text style={styles.logintext}>Hey, {'\n'}Register Now!</Text>
+      <View style={styles.textContainer}>
+        <Text style={styles.studentText}>Student</Text>
+        <Text style={styles.demacation}>/</Text>
+        <Text style={styles.guardianText}>Guardian</Text>
       </View>
-    );
-    
-    const renderSocialLogin = () => (
-      <>
-        <View style={styles.arrange1}>
-          <View style={styles.lineDesign} />
-          <Text style={styles.textlog}>Or login with</Text>
-          <View style={styles.lineDesign} />
-        </View>
-        <View style={styles.arrange2}>
-          <Image source={IMAGES.GOOGLEICON} style={{marginHorizontal: 10}} />
-          <Image source={IMAGES.FACEBOOKICON} style={{marginHorizontal: 10}} />
-        </View>
-        <View style={styles.arrange3}>
-          <Text style={styles.textlog2}>I have an account? </Text>
-          <PressableOpacity testingSuffix="" onPress={handleLoginNavigation}>
-            <Text style={styles.textlog3}> Sign In</Text>
-          </PressableOpacity>
-        </View>
-      </>
-    );
-    
-    const renderForm = () => (
-      <View style={styles.formContainer}>
-        <FormBuilder<FormFields>
-          formRef={formRef}
-          fields={formFields}
-          initialValues={{
-            emailAddress: '',
-            password: '',
-            confirmpassword: '',
-          }}
-          onSubmit={onSubmit}
-          submitButtonText="Continue"
-          submitButtonStyle={styles.buttonContainer}
-          validationSchema={registerSchema}
-        />
+    </View>
+  );
+
+  const renderSocialLogin = () => (
+    <>
+      <View style={styles.arrange1}>
+        <View style={styles.lineDesign} />
+        <Text style={styles.textlog}>Or login with</Text>
+        <View style={styles.lineDesign} />
       </View>
-    );
-    
-    const renderScrollView = (children: React.ReactNode) => (
-      <KeyboardAwareScrollView
-        style={styling.fill}
-        extraScrollHeight={Platform.select({ ios: 70, android: 30 })}
-        enableOnAndroid>
-        {children}
-      </KeyboardAwareScrollView>
-    );
-    
-    return (
-      <SafeAreaView>
-        {screenDiagonal < 5.5 ? (
-          renderScrollView(
-            <>
-              {renderHeader()}
-              {renderForm()}
-              {renderSocialLogin()}
-            </>
-          )
-        ) : (
+      <View style={styles.arrange2}>
+        <Image source={IMAGES.GOOGLEICON} style={{marginHorizontal: 10}} />
+        <Image source={IMAGES.FACEBOOKICON} style={{marginHorizontal: 10}} />
+      </View>
+      <View style={styles.arrange3}>
+        <Text style={styles.textlog2}>I have an account? </Text>
+        <PressableOpacity testingSuffix="" onPress={handleLoginNavigation}>
+          <Text style={styles.textlog3}> Sign In</Text>
+        </PressableOpacity>
+      </View>
+    </>
+  );
+
+  const renderForm = () => (
+    <View style={styles.formContainer}>
+      <FormBuilder<FormFields>
+        formRef={formRef}
+        fields={formFields}
+        initialValues={{
+          emailAddress: '',
+          password: '',
+          confirmpassword: '',
+        }}
+        onSubmit={onSubmit}
+        submitButtonText="Continue"
+        submitButtonStyle={styles.buttonContainer}
+        validationSchema={registerSchema}
+      />
+    </View>
+  );
+
+  const renderScrollView = (children: React.ReactNode) => (
+    <KeyboardAwareScrollView
+      style={styling.fill}
+      extraScrollHeight={Platform.select({ios: 70, android: 30})}
+      enableOnAndroid>
+      {children}
+    </KeyboardAwareScrollView>
+  );
+
+  return (
+    <SafeAreaView>
+      {screenDiagonal < 5.5 ? (
+        renderScrollView(
           <>
             {renderHeader()}
-            {renderScrollView(renderForm())}
+            {renderForm()}
             {renderSocialLogin()}
-          </>
-        )}
-      </SafeAreaView>
-    );
-    
+          </>,
+        )
+      ) : (
+        <>
+          {renderHeader()}
+          {renderScrollView(renderForm())}
+          {renderSocialLogin()}
+        </>
+      )}
+    </SafeAreaView>
+  );
 };

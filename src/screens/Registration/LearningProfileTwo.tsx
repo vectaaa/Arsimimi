@@ -1,7 +1,6 @@
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, FlatList, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import StageThreeIcon from '../../assets/Svg/stage3.svg';
-import {ScrollView} from 'react-native-gesture-handler';
 import {FormBuilder} from '../../components/FormBuilder';
 import {Field, FieldTypes} from '../../components/FormBuilder/types';
 import {useFormRef} from '../../Hooks/formRef';
@@ -10,16 +9,17 @@ import {AuthStackScreenProps} from '../../navigation/types';
 type FormFields = {
   learningGoals: string;
 };
+
 const LearningProfileTwo = ({
   navigation,
 }: AuthStackScreenProps<'LearningProfileTwo'>) => {
   const formRef = useFormRef<FormFields>();
 
   const learningGoalTime = [
-    'Primary School',
-    'Junior Secondary School',
-    'Senior Secondary School',
-    'Professional Exam',
+    '15-20 mins daily',
+    '20-45 mins daily',
+    '1 hour daily',
+    'More than 1 hour daily',
   ];
 
   const formFields: Field[] = [
@@ -30,6 +30,7 @@ const LearningProfileTwo = ({
       fieldProps: {
         label: 'Learning Goals',
         placeholder: 'My goal is to....... ',
+        placeholderTextColor: '#4A321F',
       },
     },
     {
@@ -44,29 +45,37 @@ const LearningProfileTwo = ({
 
   const onSubmit = (values: FormFields) => {
     console.log(values, 'form  values');
+    navigation.navigate('LearningTime');
   };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container3}>
         <Text style={styles.logintext}>Learning {'\n'}Profile</Text>
         <View style={styles.iconContainer}>
-          <StageThreeIcon width={'24'} height={'24'} />
+          <StageThreeIcon width={24} height={24} />
         </View>
       </View>
-      <ScrollView>
-        <View style={styles.formContainer}>
-          <FormBuilder<FormFields>
-            formRef={formRef}
-            fields={formFields}
-            initialValues={{
-              learningGoals: '',
-            }}
-            onSubmit={onSubmit}
-            submitButtonText="Next"
-            submitButtonStyle={[styles.buttonContainer]}
-          />
-        </View>
-      </ScrollView>
+
+      <FlatList
+        data={[]} // No list items; using header to render the form only
+        ListHeaderComponent={
+          <View style={styles.formContainer}>
+            <FormBuilder<FormFields>
+              formRef={formRef}
+              fields={formFields}
+              initialValues={{
+                learningGoals: '',
+              }}
+              onSubmit={onSubmit}
+              submitButtonText="Next"
+              submitButtonStyle={[styles.buttonContainer]}
+            />
+          </View>
+        }
+        ListFooterComponent={<View style={{height: 50}} />}
+        contentContainerStyle={{paddingBottom: 100}}
+      />
     </SafeAreaView>
   );
 };

@@ -29,7 +29,7 @@ export const stylesInput = StyleSheet.create({
     paddingVertical: 12,
     fontFamily: 'georgia',
     fontSize: 14,
-    color: COLORS.BLACK_NORMAL,
+    color: COLORS.ORANGE_THICK,
   },
 
   inputWithLeftIcon: {

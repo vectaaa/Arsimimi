@@ -75,10 +75,9 @@ export const Checkbox = ({
 
 const styles = StyleSheet.create({
   outerCircle: {
-    height: 24,
-    width: 24,
-    borderRadius: 4,
-    borderWidth: 1.8,
+    height: 20,
+    width: 20,
+    borderWidth: 1.1,
     borderColor: COLORS.WHITE_NORMAL_HOVER,
     justifyContent: 'center',
     alignItems: 'center',
@@ -90,6 +89,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   border: {
-    borderColor: COLORS.NEUTRAL_200,
+    borderColor: COLORS.BLACK,
   },
 });

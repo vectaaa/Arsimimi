@@ -77,7 +77,7 @@ const OnboardingScreen = ({navigation}) => {
             <View style={styles.rectangle} />
           </View>
           {currentSlideIndex === slides.length - 1 ? (
-            <TouchableOpacity onPress={() => navigation.replace('LoginScreen')}>
+            <TouchableOpacity onPress={() => navigation.replace('Register')}>
               <Text style={styles.skipStyle}>Finish</Text>
             </TouchableOpacity>
           ) : (
@@ -147,10 +147,7 @@ const OnboardingScreen = ({navigation}) => {
     <LinearGradient colors={['#f0f0f0', '#f8f0eb']} style={styles.container}>
       <SafeAreaView style={styles.container}>
         <StatusBar backgroundColor={'#f0f0f0'} barStyle={'dark-content'} />
-        <View
-          style={[
-            styles.centeredView,
-          ]}>
+        <View style={[styles.centeredView]}>
           <FlatList
             ref={ref}
             onMomentumScrollEnd={updateCurrentSLideIndex}

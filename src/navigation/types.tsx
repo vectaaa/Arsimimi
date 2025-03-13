@@ -18,6 +18,7 @@ export type AuthStackParamList = {
     PersonalRegistration: undefined;
     LearningProfileOne: undefined;
     LearningProfileTwo: undefined;
+    LearningTime: undefined;
     LoginScreen: undefined;
 };
 

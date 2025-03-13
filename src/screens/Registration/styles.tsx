@@ -13,14 +13,13 @@ export const styles = StyleSheet.create({
     fontWeight: '400',
   },
   textlog2: {
-    paddingTop:10,
+    paddingTop: 10,
     fontFamily: 'georgia',
     fontSize: 17,
     fontWeight: '400',
-
   },
   textlog3: {
-    paddingTop:10,
+    paddingTop: 10,
     fontFamily: 'georgia',
     fontSize: 17,
     fontWeight: '400',
@@ -36,28 +35,18 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: 10
-    
+    paddingHorizontal: 10,
   },
   arrange3: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 30,
-    
-    
   },
-  // container: {
-  //     flex: 1, // centers horizontally
-  // },
-  // formContainer: {
-  //     width: '100%',
-
-  //   },
 
   lineDesign: {
-    borderBottomWidth: 1,  // 1px border
-    borderColor: '#848484',   // Line color (you can change it)
+    borderBottomWidth: 1,
+    borderColor: '#848484',
     width: 122,
   },
   container: {
@@ -78,21 +67,10 @@ export const styles = StyleSheet.create({
     paddingRight: 15,
     // backgroundColor: '#fff',
   },
-  //   textContainer: {
-  //     flexDirection: 'row',
-  //     justifyContent: 'center', // Center text horizontally
-  //     alignItems: 'center',
-  //     marginBottom: 20,
-  //   },
-  //   logintext: {
-  //     fontSize: 24,
-  //     fontWeight: 'bold',
-  //     textAlign: 'center',
-  //     marginBottom: 30,
-  //   },
+
   studentText: {
     fontFamily: 'georgia',
-    fontSize: 17, // Larger font size for visibility
+    fontSize: 17, 
     fontWeight: '400', // Bold text for emphasis
     color: '#A35200', // Use a prominent color
   },
@@ -123,7 +101,7 @@ export const styles = StyleSheet.create({
     paddingBottom: 40,
   },
 
-buttonContainer: {
+  buttonContainer: {
     width: '92%',
     alignSelf: 'center',
     justifyContent: 'center',
