@@ -1,16 +1,20 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 
 import {AuthStackNavigator} from './AuthStackNavigator';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {RootStackParamList} from './types';
+import {navigationRef} from './Root';
+import {AppTabNavigator} from './AppTabNavigator';
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function RootStackNavigator() {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Auth" component={AuthStackNavigator} />
+        <Stack.Screen name="App" component={AppTabNavigator} />
       </Stack.Navigator>
     </NavigationContainer>
   );

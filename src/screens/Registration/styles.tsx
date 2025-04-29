@@ -98,7 +98,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'column',
     width: '100%',
     justifyContent: 'center',
-    paddingBottom: 40,
+    paddingBottom: 0,
   },
 
   buttonContainer: {

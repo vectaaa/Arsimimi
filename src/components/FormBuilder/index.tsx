@@ -15,7 +15,6 @@ import {
   BaseInputSubTypes,
   PinFieldValues,
   PinFormFieldProps,
-  CheckboxFormFieldValues,
 } from './types';
 import {SelectPicker} from '../SelectPicker/index';
 import {useInputFocus} from '../../Hooks/input';
@@ -57,7 +56,6 @@ export function FormBuilder<ReturnType extends FieldValues>({
   additionalButton,
   buttonLocation = 'bottom',
   containerStyle,
-  render,
 }: FormBuilderProps<ReturnType>) {
   const {focusState, setFieldFocus, resetFieldFocus, resetFocusAll} =
     useInputFocus(fields);
@@ -90,7 +88,6 @@ export function FormBuilder<ReturnType extends FieldValues>({
                 const {
                   name,
                   type,
-                  data,
                   subtype,
                   fieldProps = {},
                   additionalComponent,

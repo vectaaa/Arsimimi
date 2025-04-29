@@ -66,7 +66,7 @@ const PersonalRegistration = ({
           'I agree to the Terms and Conditions, Privacy Policy and that I’m over 16 or have the permission of a guardian.',
         style: {
           width: '100%',
-          padding: 20,
+          paddingHorizontal: 25,
           justifyContent: 'center',
           alignSelf: 'center',
         },

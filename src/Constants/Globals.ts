@@ -1,4 +1,4 @@
-const ICON_SCALE = '24';
+const ICON_SCALE = 24;
 
 export const GLOBALS = {
   ANDROID_ELEVATION: 4,
