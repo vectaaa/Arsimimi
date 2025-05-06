@@ -1,11 +1,14 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {AppScreen} from '../../components/Screen/AppScreen';
 
 const Community = () => {
   return (
-    <View>
-      <Text>Community</Text>
-    </View>
+    <AppScreen>
+      <View>
+        <Text>Community</Text>
+      </View>
+    </AppScreen>
   );
 };
 

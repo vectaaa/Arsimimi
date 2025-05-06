@@ -20,18 +20,19 @@ export const AppTabNavigator = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: COLORS.TEAL_NORMAL,
+        tabBarActiveTintColor: COLORS.ORANGE_NORMAL,
         tabBarInactiveTintColor: COLORS.WHITE_DARK,
         tabBarLabelStyle: styles.label,
         tabBarHideOnKeyboard: true,
         tabBarStyle: styles.bar,
         tabBarLabelPosition: 'below-icon',
+        
       }}
       safeAreaInsets={{
         bottom: Math.max(insets.bottom + 5, 15),
       }}>
       <Tab.Screen
-        name="HomeStack"
+        name="Home"
         component={Dashboard}
         options={{
           tabBarIcon: Icons.HomeIcon,
@@ -86,6 +87,7 @@ export const AppTabNavigator = () => {
 
 const styles = StyleSheet.create({
   label: {
+    color: COLORS.ORANGE_THICK,
     fontSize: 10,
     width: '100%',
     fontWeight: '600',

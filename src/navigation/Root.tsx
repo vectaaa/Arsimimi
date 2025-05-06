@@ -6,7 +6,7 @@
  */
 import {CommonActions, NavigationContainerRef} from '@react-navigation/native';
 import * as React from 'react';
-import {RootStackParamList} from './types';
+import {HomeStackParamList, RootStackParamList} from './types';
 
 export const navigationRef =
   React.createRef<NavigationContainerRef<RootStackParamList>>();
@@ -33,3 +33,65 @@ export function navigateAndReset(routes = [], index = 0) {
     }),
   );
 }
+
+export function navigateAndSimpleReset(name: string, index = 0) {
+  navigationRef.current?.dispatch(
+    CommonActions.reset({
+      index,
+      routes: [{name}],
+    }),
+  );
+}
+
+type GetTransactionNavActionProps = {
+  isSuccessful: boolean;
+  amount: string;
+  currency: string;
+  fromAccountNumber: string;
+  fromAccountType: string;
+  reference: string;
+  rows: string;
+  closeRoute?: keyof HomeStackParamList;
+  onRetry: () => void;
+};
+
+export const getTransactionNavAction = ({
+  amount,
+  currency,
+  fromAccountNumber,
+  fromAccountType,
+  isSuccessful,
+  reference,
+  rows,
+  closeRoute,
+  onRetry,
+}: GetTransactionNavActionProps) => {
+  const statusParams = {
+    amount,
+    currency,
+    fromAccountNumber,
+    fromAccountType,
+    isSuccessful,
+    reference,
+    rows,
+    onRetry,
+  };
+
+  const routes = [
+    {name: 'Dashboard'},
+    {
+      name: 'TransactionStatus',
+      params: statusParams,
+    },
+  ];
+
+  if (closeRoute) {
+    routes.splice(1, 0, {name: closeRoute});
+  }
+
+  if (isSuccessful) {
+    return CommonActions.reset({routes});
+  } else {
+    return CommonActions.navigate('TransactionStatus', statusParams);
+  }
+};

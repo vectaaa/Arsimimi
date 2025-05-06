@@ -35,7 +35,7 @@ export type AuthStackScreenProps<T extends keyof AuthStackParamList> =
 
 //For AppTab
 export type AppTabParamList = {
-  HomeStack: NavigatorScreenParams<HomeStackParamList>;
+  Home: undefined;
   ActivityStack: NavigatorScreenParams<ActivityStackParamList>;
   CommunityStack: NavigatorScreenParams<CommunityStackParamList>;
   HelpStack: NavigatorScreenParams<HelpStackParamList>;
@@ -50,8 +50,8 @@ export type AppTabScreenProps<T extends keyof AppTabParamList> =
 
 //Homestack
 export type HomeStackParamList = {
-  Dashboard: undefined;
-  // HomeStack: NavigatorScreenParams<AppTabParamList>;
+  // Dashboard: undefined;
+  HomeStack: NavigatorScreenParams<AppTabParamList>;
 };
 export type HomeStackScreenProps<T extends keyof HomeStackParamList> =
   CompositeScreenProps<

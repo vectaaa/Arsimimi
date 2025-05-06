@@ -10,6 +10,10 @@ import {default as Settings} from '../assets/Svg/Settings.svg';
 import {default as Activity} from '../assets/Svg/Activity.svg';
 import {default as ArrowLeft} from '../assets/Svg/arrow-left.svg';
 import {default as HelpIcon} from '../assets/Svg/Help.svg';
+import {default as NotificationIcon} from '../assets/Svg/notificationicon.svg';
+import {default as StarIcon} from '../assets/Svg/Star.svg';
+import {default as SearchIcon} from '../assets/Svg/searchicon.svg';
+import {default as MaleAvatarIcon} from '../assets/Svg/maleavatar.svg';
 
 export type Icon = keyof typeof Icons;
 
@@ -26,4 +30,8 @@ export const Icons = {
   Activity,
   ArrowLeft,
   HelpIcon,
+  MaleAvatarIcon,
+  NotificationIcon,
+  StarIcon,
+  SearchIcon,
 };

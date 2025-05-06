@@ -1,11 +1,14 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {AppScreen} from '../../components/Screen/AppScreen';
 
 const Settings = () => {
   return (
-    <View>
-      <Text>Settings</Text>
-    </View>
+    <AppScreen>
+      <View>
+        <Text>Settings</Text>
+      </View>
+    </AppScreen>
   );
 };
 

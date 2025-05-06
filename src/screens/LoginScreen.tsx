@@ -21,6 +21,7 @@ import {styles} from './Registration/styles';
 // import {LinkQuestion} from '../components/LinkQuestion';
 import {PressableOpacity} from '../components/Buttons/PressebleOpacity';
 import {IMAGES} from '../Theme/Images';
+import {CommonActions} from '@react-navigation/native';
 
 type FormFields = {
   emailAddress: string;
@@ -37,10 +38,18 @@ export const LoginScreen = ({
 
   const formRef = useFormRef<FormFields>();
 
+  const navigateToDashboard = () => {
+    navigation.dispatch(
+      CommonActions.reset({
+        routes: [{name: 'App'}],
+      }),
+    );
+  };
+
   //Where the initiate registration starts
   const onSubmit = (values: FormFields) => {
     console.log(values, 'form values');
-    navigation.navigate('Dashboard');
+    navigateToDashboard();
   };
 
   const loginSchema = object({
