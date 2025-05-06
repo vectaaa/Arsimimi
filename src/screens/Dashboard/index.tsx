@@ -9,7 +9,7 @@ const Dashboard = () => {
     <AppScreen>
       <View style={styles.topRow}>
         <Icons.MaleAvatarIcon/>
-        <Typography>Hi, {firstname}</Typography>
+        <Typography>Hi,</Typography>
       </View>
     </AppScreen>
   );
