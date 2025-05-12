@@ -6,7 +6,7 @@ import RootStackNavigator from './src/navigation/RootStackNavigator';
 function App() {
   return (
     <GestureHandlerRootView>
-      <RootStackNavigator/>
+      <RootStackNavigator />
       {/* <Navigation /> */}
     </GestureHandlerRootView>
   );

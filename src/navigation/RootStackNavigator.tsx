@@ -19,6 +19,7 @@ export default function RootStackNavigator() {
         backgroundColor={COLORS.TRANSPARENT}
         translucent
       />
+
       <NavigationContainer ref={navigationRef}>
         <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name="Auth" component={AuthStackNavigator} />

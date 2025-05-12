@@ -14,6 +14,7 @@ import {default as NotificationIcon} from '../assets/Svg/notificationicon.svg';
 import {default as StarIcon} from '../assets/Svg/Star.svg';
 import {default as SearchIcon} from '../assets/Svg/searchicon.svg';
 import {default as MaleAvatarIcon} from '../assets/Svg/maleavatar.svg';
+import {default as ArrowRight} from '../assets/Svg/arrow-right.svg';
 
 export type Icon = keyof typeof Icons;
 

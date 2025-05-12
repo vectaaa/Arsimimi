@@ -11,11 +11,12 @@ export const styling = StyleSheet.create({
     marginBottom: 24,
   },
   borderRadius: {
-    borderRadius: 6,
+    borderRadius: 4,
   },
   boxHeight: {
     height: 168,
   },
+  padding: {paddingTop: 24},
   shadow: {
     ...Platform.select({
       ios: {

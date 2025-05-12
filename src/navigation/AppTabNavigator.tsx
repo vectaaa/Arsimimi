@@ -26,7 +26,6 @@ export const AppTabNavigator = () => {
         tabBarHideOnKeyboard: true,
         tabBarStyle: styles.bar,
         tabBarLabelPosition: 'below-icon',
-        
       }}
       safeAreaInsets={{
         bottom: Math.max(insets.bottom + 5, 15),
