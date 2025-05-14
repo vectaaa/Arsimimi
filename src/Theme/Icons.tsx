@@ -15,12 +15,20 @@ import {default as StarIcon} from '../assets/Svg/Star.svg';
 import {default as SearchIcon} from '../assets/Svg/searchicon.svg';
 import {default as MaleAvatarIcon} from '../assets/Svg/maleavatar.svg';
 import {default as ArrowRight} from '../assets/Svg/arrow-right.svg';
+import {default as PhoneIcon} from '../assets/Svg/phoneicon.svg';
+import {default as MessageIcon} from '../assets/Svg/chaticon.svg';
+import {default as QuestionMarkIcon} from '../assets/Svg/quetionmarkicon.svg';
+import {default as CloseIcon} from '../assets/Svg/closeIcon.svg';
 
 export type Icon = keyof typeof Icons;
 
 export const Icons = {
+  ArrowRight,
+  QuestionMarkIcon,
+  CloseIcon,
   Checkmark,
   PasswordHidden,
+  PhoneIcon,
   PasswordVisible,
   Info,
   GoogleIcon,
@@ -32,6 +40,7 @@ export const Icons = {
   ArrowLeft,
   HelpIcon,
   MaleAvatarIcon,
+  MessageIcon,
   NotificationIcon,
   StarIcon,
   SearchIcon,

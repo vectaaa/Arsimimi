@@ -8,8 +8,8 @@ import Dashboard from '../Screens/Dashboard';
 import {Icons} from '../Theme/Icons';
 import Activity from '../Screens/Activity';
 import Community from '../Screens/Community';
-import Help from '../Screens/Help';
 import Settings from '../Screens/Settings';
+import { HelpStackNavigator } from './HelpStackNavigator';
 
 const Tab = createBottomTabNavigator<AppTabParamList>();
 
@@ -62,7 +62,7 @@ export const AppTabNavigator = () => {
       />
       <Tab.Screen
         name="HelpStack"
-        component={Help}
+        component={HelpStackNavigator}
         options={{
           tabBarIcon: Icons.HelpIcon,
           tabBarLabel: 'Help',

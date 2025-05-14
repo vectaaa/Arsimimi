@@ -16,6 +16,19 @@ export const styling = StyleSheet.create({
   boxHeight: {
     height: 168,
   },
+  font: {
+    fontFamily: 'georgiab',
+    color: COLORS.ORANGE_THICK,
+    fontSize: 20,
+  },
+  descText: {
+    fontFamily: 'georgia',
+    fontWeight: '400',
+    fontSize: 12,
+    lineHeight: 15,
+    color: COLORS.DARK_GRAY,
+    marginTop: 8,
+  },
   padding: {paddingTop: 24},
   shadow: {
     ...Platform.select({

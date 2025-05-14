@@ -83,6 +83,9 @@ export type CommunityStackScreenProps<T extends keyof CommunityStackParamList> =
 //Help
 export type HelpStackParamList = {
   Help: undefined;
+  CallUs: undefined;
+  ChatWithUs: undefined;
+  Faqs: undefined;
 };
 export type HelpStackScreenProps<T extends keyof HelpStackParamList> =
   CompositeScreenProps<

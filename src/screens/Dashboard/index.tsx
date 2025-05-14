@@ -6,8 +6,7 @@ import {COLORS} from '../../Theme/Colors';
 import {FlatList} from 'react-native-gesture-handler';
 import {styling} from '../../Theme/Styles/GlobalStyles';
 import {Button} from '../../components/Buttons/Button';
-import { PressableOpacity } from '../../components/Buttons/PressebleOpacity';
-// import {useScaling} from '../../Hooks/useScaling';
+import {PressableOpacity} from '../../components/Buttons/PressebleOpacity';
 
 type SubjectSlides = {
   id: string;
@@ -32,10 +31,6 @@ const subjectSlides: SubjectSlides[] = [
   },
 ];
 const Dashboard = () => {
-  // const {scaleHorizontal} = useScaling();
-  // const scaledLineHeight = (size: number) => {
-  //   scaleHorizontal(size * 1.2 + 4);
-  // };
   const subjectView = ({item}: {item: SubjectSlides}) => {
     return (
       <View style={styles.subjectContainer}>
@@ -112,6 +107,12 @@ const Dashboard = () => {
             Exam-like conditions with timed tests, set difficulty levels, and
             subject-specific questions.
           </Text>
+          <PressableOpacity testingSuffix={''}>
+            <View style={styles.horizontalArrange}>
+              <Text style={styles.textLowButton}>Start Exam Mode</Text>
+              <Icons.ArrowRight />
+            </View>
+          </PressableOpacity>
         </View>
 
         {/* Practice Mode       */}
@@ -121,9 +122,10 @@ const Dashboard = () => {
             Customize Your Practice: Select difficulty, time limit, subjects and
             topics.
           </Text>
-          <PressableOpacity testingSuffix={''} onPress={}>
-            <View>
-              <Text>Take Practice Test</Text>
+          <PressableOpacity testingSuffix={''}>
+            <View style={styles.horizontalArrange}>
+              <Text style={styles.textLowButton}>Take Practice Test</Text>
+              <Icons.ArrowRight />
             </View>
           </PressableOpacity>
         </View>
@@ -138,6 +140,15 @@ const styles = StyleSheet.create({
   topRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  horizontalArrange: {
+    marginHorizontal: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    borderBottomColor: COLORS.ORANGE_THICK,
+    borderBottomWidth: 0.4,
+    alignSelf: 'flex-end',
   },
   rightIcons: {
     flexDirection: 'row',
@@ -157,6 +168,13 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 14,
     color: COLORS.ORANGE_THICK,
+    lineHeight: 24,
+  },
+  textLowButton: {
+    fontFamily: 'georgia',
+    fontWeight: '400',
+    fontSize: 14,
+    color: COLORS.ORANGE_LIGHT_100,
     lineHeight: 24,
   },
   leftIcons: {
