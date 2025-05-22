@@ -50,8 +50,10 @@ export type AppTabScreenProps<T extends keyof AppTabParamList> =
 
 //Homestack
 export type HomeStackParamList = {
-  // Dashboard: undefined;
+  Dashboard: undefined;
   HomeStack: NavigatorScreenParams<AppTabParamList>;
+  PracticeTest: undefined,
+  ExamMode: undefined,
 };
 export type HomeStackScreenProps<T extends keyof HomeStackParamList> =
   CompositeScreenProps<

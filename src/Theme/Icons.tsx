@@ -19,6 +19,8 @@ import {default as PhoneIcon} from '../assets/Svg/phoneicon.svg';
 import {default as MessageIcon} from '../assets/Svg/chaticon.svg';
 import {default as QuestionMarkIcon} from '../assets/Svg/quetionmarkicon.svg';
 import {default as CloseIcon} from '../assets/Svg/closeIcon.svg';
+import {default as PencilIcon} from '../assets/Svg/pencilIcon.svg';
+
 
 export type Icon = keyof typeof Icons;
 
@@ -28,6 +30,7 @@ export const Icons = {
   CloseIcon,
   Checkmark,
   PasswordHidden,
+  PencilIcon,
   PhoneIcon,
   PasswordVisible,
   Info,

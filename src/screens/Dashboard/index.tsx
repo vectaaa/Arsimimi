@@ -7,6 +7,7 @@ import {FlatList} from 'react-native-gesture-handler';
 import {styling} from '../../Theme/Styles/GlobalStyles';
 import {Button} from '../../components/Buttons/Button';
 import {PressableOpacity} from '../../components/Buttons/PressebleOpacity';
+import {HomeStackScreenProps} from '../../navigation/types';
 
 type SubjectSlides = {
   id: string;
@@ -30,7 +31,7 @@ const subjectSlides: SubjectSlides[] = [
     title: 'Physics',
   },
 ];
-const Dashboard = () => {
+const Dashboard = ({navigation}: HomeStackScreenProps<'Dashboard'>) => {
   const subjectView = ({item}: {item: SubjectSlides}) => {
     return (
       <View style={styles.subjectContainer}>
@@ -39,6 +40,9 @@ const Dashboard = () => {
     );
   };
 
+  const openPracticeTest = () => {
+    navigation.navigate('PracticeTest');
+  };
   return (
     <AppScreen>
       <View style={styles.topRow}>
@@ -122,7 +126,7 @@ const Dashboard = () => {
             Customize Your Practice: Select difficulty, time limit, subjects and
             topics.
           </Text>
-          <PressableOpacity testingSuffix={''}>
+          <PressableOpacity testingSuffix={''} onPress={openPracticeTest}>
             <View style={styles.horizontalArrange}>
               <Text style={styles.textLowButton}>Take Practice Test</Text>
               <Icons.ArrowRight />

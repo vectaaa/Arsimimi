@@ -4,12 +4,12 @@ import {StyleSheet} from 'react-native';
 import {AppTabParamList} from './types';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {COLORS} from '../Theme/Colors';
-import Dashboard from '../Screens/Dashboard';
 import {Icons} from '../Theme/Icons';
 import Activity from '../Screens/Activity';
 import Community from '../Screens/Community';
 import Settings from '../Screens/Settings';
 import { HelpStackNavigator } from './HelpStackNavigator';
+import { HomeStackNavigator } from './HomeStackNavigator';
 
 const Tab = createBottomTabNavigator<AppTabParamList>();
 
@@ -32,7 +32,7 @@ export const AppTabNavigator = () => {
       }}>
       <Tab.Screen
         name="Home"
-        component={Dashboard}
+        component={HomeStackNavigator}
         options={{
           tabBarIcon: Icons.HomeIcon,
           tabBarLabel: 'Home',

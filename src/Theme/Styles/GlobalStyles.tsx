@@ -29,6 +29,11 @@ export const styling = StyleSheet.create({
     color: COLORS.DARK_GRAY,
     marginTop: 8,
   },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   padding: {paddingTop: 24},
   shadow: {
     ...Platform.select({
