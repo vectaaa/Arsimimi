@@ -1,18 +1,22 @@
-import { BaseQueryApi, createApi, FetchArgs, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Mutex } from 'async-mutex';
+import {
+  BaseQueryApi,
+  createApi,
+  FetchArgs,
+  fetchBaseQuery,
+} from '@reduxjs/toolkit/query/react';
+import {Mutex} from 'async-mutex';
 import i18next from 'i18next';
 
-import { DEVICE } from '../Constants/Device';
-import { ENDPOINTS } from '../Constants/Endpoints';
-import { ENV } from '../Constants/Env';
-import { GLOBALS } from '../Constants/Globals';
-import { REQUESTS } from '../Constants/Requests';
-import { addRequest, removeRequest } from '../Store/Common/commonSlice'; 
-// import { logout } from '../Utils/logout';
-import { getSessionID } from '../Utils/storage/authStorage';
-import { logout } from '../Utils/logout';
+import {DEVICE} from '../Constants/Device';
+import {ENDPOINTS} from '../Constants/Endpoints';
+import {ENV} from '../Constants/Env';
+import {GLOBALS} from '../Constants/Globals';
+import {REQUESTS} from '../Constants/Requests';
+import {addRequest, removeRequest} from '../Store/Common/commonSlice';
+import {getSessionID} from '../Utils/storage/authStorage';
+import {logout} from '../Utils/logout';
 
-const SPECIFIC_RESPONSE_CODE_URLS = [`${ENV.API_URL}${ENDPOINTS.LOGIN_ID_LOOKUP}`];
+const SPECIFIC_RESPONSE_CODE_URLS = [`${ENV.API_URL}${ENDPOINTS.LOGIN}`];
 
 const mutex = new Mutex();
 
@@ -59,11 +63,9 @@ const responseHandler = (extraOptions: any) => async (response: Response) => {
   if (
     ((result?.code === 0 || result?.responseCode === 0) &&
       !SPECIFIC_RESPONSE_CODE_URLS.includes(response.url)) ||
-    (response.url === `${ENV.API_URL}${ENDPOINTS.LOGIN_ID_LOOKUP}` && result?.code === 1015) ||
-    (response.url === `${ENV.API_URL}${ENDPOINTS.LOGIN}` && result?.code === 22) ||
-    (response.url.includes(`${ENV.API_URL}${ENDPOINTS.GET_TRANSFER_BENEFICIARY}`) &&
-      result?.code === 10) ||
-    // can't use url, because same url can either require manual error handlign or not
+    (response.url === `${ENV.API_URL}${ENDPOINTS.LOGIN}` &&
+      result?.code === 22) ||
+    // can't use url, because same url can either require manual error handling or not
     (extraOptions && extraOptions[REQUESTS.MANUAL_ERROR_HANDLE])
   ) {
     return result;
@@ -72,7 +74,11 @@ const responseHandler = (extraOptions: any) => async (response: Response) => {
   throw new Error(result?.description);
 };
 
-const runQuery = async (newArgs: FetchArgs, api: BaseQueryApi, extraOptions: any) => {
+const runQuery = async (
+  newArgs: FetchArgs,
+  api: BaseQueryApi,
+  extraOptions: any,
+) => {
   let result = null;
   if (extraOptions && extraOptions[REQUESTS.WITHOUT_LOADER]) {
     result = await baseQuery(newArgs, api, extraOptions);
@@ -87,11 +93,15 @@ const runQuery = async (newArgs: FetchArgs, api: BaseQueryApi, extraOptions: any
   return result;
 };
 
-const baseQueryWithInterceptor = async (args: FetchArgs, api: BaseQueryApi, extraOptions: any) => {
+const baseQueryWithInterceptor = async (
+  args: FetchArgs,
+  api: BaseQueryApi,
+  extraOptions: any,
+) => {
   // wait until the mutex is available without locking it
   await mutex.waitForUnlock();
 
-  const newArgs = { ...args, responseHandler: responseHandler(extraOptions) };
+  const newArgs = {...args, responseHandler: responseHandler(extraOptions)};
 
   // checking whether the mutex is locked
   if (!mutex.isLocked()) {

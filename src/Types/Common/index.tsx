@@ -1,6 +1,7 @@
 export type Gender = 'M' | 'F';
 
-export type GenericResponse = { code: number; description: string };
+// export type GenericResponse = { code: number; description: string };
+export type GenericResponse = { message: string };
 
 export type ImageType = 'jpg' | 'jpeg' | 'png' | 'bmp';
 

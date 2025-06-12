@@ -29,6 +29,7 @@ export const Register = ({navigation}: AuthStackScreenProps<'Register'>) => {
 
   //Where the initiate registration starts
   const onSubmit = (values: FormFields) => {
+    
     console.log(values, 'form values');
     navigation.navigate('ConfirmEmail');
   };

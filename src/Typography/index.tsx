@@ -1,7 +1,14 @@
 import React from 'react';
-import { Text, StyleSheet, TextProps, TextStyle, StyleProp, ColorValue } from 'react-native';
-import { COLORS } from '../Theme/Colors';
-import { useScaling } from '../Hooks/useScaling.tsx';
+import {
+  Text,
+  StyleSheet,
+  TextProps,
+  TextStyle,
+  StyleProp,
+  ColorValue,
+} from 'react-native';
+import {COLORS} from '../Theme/Colors';
+import {useScaling} from '../Hooks/useScaling.tsx';
 
 export type FontWeight =
   | '100' // Thin
@@ -36,19 +43,19 @@ export const Typography = ({
   testingSuffix,
   ...restNativeProps
 }: TypographyProps) => {
-  const { scaleHorizontal } = useScaling();
+  const {scaleHorizontal} = useScaling();
 
   const getFontFamily = () => {
     // prettier-ignore
     switch (weight) {
-      case '100': return `Swiss721BT-Thin${italic ? 'Italic' : ''}`;
-      case '300': return `Swiss721BT-Light${italic ? 'Italic' : ''}`;
-      case '400': return `Swiss721BT-${italic ? 'Italic' : 'Roman'}`;
-      case '500': return `Swiss721BT-Medium${italic ? 'Italic' : ''}`;
-      case '700': return `Swiss721BT-Bold${italic ? 'Italic' : ''}`;
-      case '800': return `Swiss721BT-Heavy${italic ? 'Italic' : ''}`;
-      case '900': return `Swiss721BT-Black${italic ? 'Italic' : ''}`;
-      default: return 'Swiss721BT-Roman';
+      case '100': return `georgia${italic ? 'georgiai' : ''}`;
+      case '300': return `georgia${italic ? 'georgiai' : ''}`;
+      case '400': return `georgia${italic ? 'georgiai' : ''}`;
+      case '500': return `georgia${italic ? 'georgiai' : ''}`;
+      case '700': return `georgiab${italic ? 'georgiai' : ''}`;
+      case '800': return `georgia${italic ? 'georgiai' : ''}`;
+      case '900': return `georgia${italic ? 'georgiai' : ''}`;
+      default: return 'georgia';
     }
   };
 
@@ -62,13 +69,12 @@ export const Typography = ({
         },
         uppercase && styles.uppercase,
         capitalize && styles.capitalize,
-        !!color && { color },
+        !!color && {color},
         style,
       ]}
       {...restNativeProps}
       testID={testingSuffix}
-      accessibilityLabel={testingSuffix}
-    >
+      accessibilityLabel={testingSuffix}>
       {children}
     </Text>
   );

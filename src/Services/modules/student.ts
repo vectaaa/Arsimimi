@@ -1,0 +1,36 @@
+import ENDPOINTS from '../../Constants/Endpoints';
+import {REQUESTS} from '../../Constants/Requests';
+import {rtkQueryService} from '../api';
+import {GenericResponse} from '../../Types/Common';
+import {toUpperFirstSign} from '../../Utils/formatters';
+import type * as Types from '../../Types/StudentService';
+
+export const studentApi = rtkQueryService.injectEndpoints({
+  endpoints: build => ({
+
+    //mutation
+    registrationInitiate: build.mutation<
+      Types.RegistrationCompleteResponse,
+      Types.RegistrationInitiateData
+    >({
+      query: body => ({
+        url: ENDPOINTS.REGISTER_INITIATE,
+        method: 'POST',
+        body,
+      }),
+    }),
+
+    validateOtp: build.mutation<Types.ValidateOtpResponse, Types.ValidateOtpData>({
+      query: body => ({
+        url: ENDPOINTS.VALIDATE_OTP,
+        method: 'POST',
+        body,
+      }),
+    }),
+  }),
+
+  registrationComplete: build.mutation<>({
+    
+  }),
+  overrideExisting: false,
+});

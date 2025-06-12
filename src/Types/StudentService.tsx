@@ -1,8 +1,8 @@
-import { SelectedSecurityQuestion } from '@/Components/FormBuilder/SecurityQuestionsForm';
-import { Account, ProfileImage } from './Account';
-import { GenericResponse, ImageType } from './Common';
-import { Device } from './Device';
-import { BankTransaction, Transaction, TransactionType } from './Transaction';
+import {SelectedSecurityQuestion} from '@/Components/FormBuilder/SecurityQuestionsForm';
+import {Account, ProfileImage} from './Account';
+import {GenericResponse, ImageType} from './Common';
+import {Device} from './Device';
+import {BankTransaction, Transaction, TransactionType} from './Transaction';
 
 // USED TYPES
 export enum OtpType {
@@ -11,13 +11,6 @@ export enum OtpType {
   DEVICE_BIND_OTP = 'DEVICE_BIND_OTP',
   ACCOUNT_OPENING = 'ACCOUNT_OPENING',
 }
-
-export type ValidateOtpData = {
-  deviceId: string;
-  otp: string;
-  bvn: string;
-};
-export type ValidateOtpResponse = GenericResponse & { regOtpCode: string };
 
 export type ResendTargetedOtpData = {
   deviceId: string;
@@ -35,38 +28,54 @@ export type ResendOtpData = {
   deviceId: string;
 };
 
+//Arsimimi types
 export type RegistrationInitiateData = {
-  deviceId: string;
-  accountNumber: string;
-  phoneNumber: string;
-  institutionCD: string;
-  longitude: string;
-  latitide: string;
-  deviceModel: string;
+  email: string;
+  password: string;
 };
 export type RegistrationInitiateResponse = GenericResponse & {
-  kycLevel: number;
-  accountNumber: string;
-  phoneNumber: string;
-  email: string;
-  onboardMode: number;
-  custNo: string;
-  dateOfBirth: string;
+  data: {
+    id: number;
+    email: string;
+  };
 };
 
-export type RegistrationCompleteData = {
-  deviceId: string;
-  deviceModel: string;
-  deviceName: string;
-  institutionCD: string;
-  mpin: string;
-  transactionPin: string;
-  username: string;
+export type ValidateOtpData = {
+  email: string;
   otp: string;
-  onboardMode: string;
-  securityQuestions: SelectedSecurityQuestion;
-  longitude: string;
-  latitude: string;
+};
+export type ValidateOtpResponse = GenericResponse & {
+  data: {
+    accessToken: string;
+    email: string;
+  };
+};
+//End of Arsimimi//
+
+export type ExamType =
+  | ' Primary School '
+  | ' Junior Secondary School'
+  | ' Senior Secondary School'
+  | ' Professional Exam';
+export type LearningGoal =
+  | '15-20 mins daily'
+  | '20-45 mins daily'
+  | '1 hour daily'
+  | 'More than 1 hour daily';
+
+export type RegistrationCompleteData = {
+  name: string;
+  ageRange: string;
+  guardianEmail: string;
+  agreeToTerms: string;
+  nameOfSchool: string;
+  educationLevel: string;
+  grade: string;
+  examTypes: string[];
+  goalDescription: string;
+  learningGoals: string[];
+  learningTime: string;
+  canNotify: string;
 };
 export type RegistrationCompleteResponse = GenericResponse;
 
@@ -128,14 +137,18 @@ export type LoginResponse = GenericResponse &
     sessionID: string;
   };
 
-export type AccountsGetData = { accountNumber: string };
+export type AccountsGetData = {accountNumber: string};
 export type AccountsGetResponse = GenericResponse & {
   accounts: Account[];
   custNo: string;
   totalAvailableBalance: number;
 };
 // PRESET TYPES
-export type GenericChangePinData = { tpin: string; newTPin: string; confirmTPin: string };
+export type GenericChangePinData = {
+  tpin: string;
+  newTPin: string;
+  confirmTPin: string;
+};
 
 export type Location = {
   name: string;
@@ -161,7 +174,11 @@ export type ResetTransactionPinData = {
   authorizationString: string;
 };
 
-export type ChangePasswordData = { mpin: string; newMPin: string; confirmMPin: string };
+export type ChangePasswordData = {
+  mpin: string;
+  newMPin: string;
+  confirmMPin: string;
+};
 
 export type InitiateResetPasswordData = {
   accountNumber: string;
@@ -238,7 +255,7 @@ export type OpenAccountResponse = GenericResponse & {
   custNo: string;
 };
 
-export type ValidatePinData = { accountNumber: string; transactionPin: string };
+export type ValidatePinData = {accountNumber: string; transactionPin: string};
 
 export type ResetPinData = {
   newTPin: string;
