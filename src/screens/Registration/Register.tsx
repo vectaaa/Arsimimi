@@ -12,7 +12,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {styling} from '../../Theme/Styles/GlobalStyles';
 import {IMAGES} from '../../Theme/Images';
 import {PressableOpacity} from '../../components/Buttons/PressebleOpacity';
-
+import {useRegistrationInitiateMutation} from '../../Services/modules/student';
 
 type FormFields = {
   emailAddress: string;
@@ -26,12 +26,27 @@ export const Register = ({navigation}: AuthStackScreenProps<'Register'>) => {
   const screenDiagonal = Math.sqrt(width * width + height * height) / 160;
 
   const formRef = useFormRef<FormFields>();
+  const [initiateRegistration] = useRegistrationInitiateMutation();
 
   //Where the initiate registration starts
   const onSubmit = (values: FormFields) => {
-    
-    console.log(values, 'form values');
-    navigation.navigate('ConfirmEmail');
+    initiateRegistration({
+      email: values.emailAddress,
+      password: values.password,
+    })
+      .unwrap()
+      .then(response => {
+        navigation.navigate('ConfirmEmail', {
+          id: response.data.id,
+          email: response.data.email,
+          onContinue: (otp: string) => {
+            navigation.navigate('LearningProfileOne', {
+              otp: otp,
+            });
+          },
+        });
+      })
+      .catch(() => {});
   };
 
   const registerSchema = object({

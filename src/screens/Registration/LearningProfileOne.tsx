@@ -15,7 +15,9 @@ type FormFields = {
 
 const LearningProfileOne = ({
   navigation,
+  route,
 }: AuthStackScreenProps<'LearningProfileOne'>) => {
+  const {otp} = route.params;
   const formRef = useFormRef<FormFields>();
 
   const educationLevelOptions = [

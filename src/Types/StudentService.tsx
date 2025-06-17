@@ -50,7 +50,6 @@ export type ValidateOtpResponse = GenericResponse & {
     email: string;
   };
 };
-//End of Arsimimi//
 
 export type ExamType =
   | ' Primary School '
@@ -78,6 +77,8 @@ export type RegistrationCompleteData = {
   canNotify: string;
 };
 export type RegistrationCompleteResponse = GenericResponse;
+
+//End of Arsimimi//
 
 export type LoginLookupResponse = GenericResponse & {
   available: boolean;

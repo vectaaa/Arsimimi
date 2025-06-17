@@ -7,10 +7,9 @@ import type * as Types from '../../Types/StudentService';
 
 export const studentApi = rtkQueryService.injectEndpoints({
   endpoints: build => ({
-
     //mutation
     registrationInitiate: build.mutation<
-      Types.RegistrationCompleteResponse,
+      Types.RegistrationInitiateResponse,
       Types.RegistrationInitiateData
     >({
       query: body => ({
@@ -20,17 +19,40 @@ export const studentApi = rtkQueryService.injectEndpoints({
       }),
     }),
 
-    validateOtp: build.mutation<Types.ValidateOtpResponse, Types.ValidateOtpData>({
+    validateOtp: build.mutation<
+      Types.ValidateOtpResponse,
+      Types.ValidateOtpData
+    >({
       query: body => ({
         url: ENDPOINTS.VALIDATE_OTP,
         method: 'POST',
         body,
       }),
     }),
-  }),
 
-  registrationComplete: build.mutation<>({
-    
+    // resendOtp: build.mutation<>({
+    //   query: body => ({
+    //     url: ENDPOINTS.
+    //   }),
+    // }),
+
+    registrationComplete: build.mutation<
+      Types.RegistrationCompleteResponse,
+      Types.RegistrationCompleteData
+    >({
+      query: body => ({
+        url: ENDPOINTS.CREATE_USER,
+        methods: 'POST',
+        body,
+      }),
+    }),
   }),
   overrideExisting: false,
 });
+
+export const {
+  //mutation
+  useRegistrationInitiateMutation,
+  useValidateOtpMutation,
+  useRegistrationCompleteMutation,
+} = studentApi;

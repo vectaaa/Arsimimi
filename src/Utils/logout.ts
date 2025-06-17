@@ -1,8 +1,8 @@
 import { CommonActions } from '@react-navigation/native';
 
 import { navigationRef } from '../navigation/Root';
-import { store } from '@/Store';
-import { setIsOpaqueLoaderVisible } from '@/Store/Common/commonSlice';
+import { store } from '../Store';
+import { setIsOpaqueLoaderVisible } from '../Store/Common/commonSlice';
 import { clearUserData } from '../Utils/clearUserData';
 import { wait } from '../Utils/technical';
 
