@@ -1,5 +1,5 @@
 import {View, Text, Platform, Image, Dimensions} from 'react-native';
-import React from 'react';
+import * as React from 'react';
 import {AuthStackScreenProps} from '../../navigation/types';
 import {object} from 'yup';
 import {VALIDATION} from '../../Constants/Validation';
@@ -36,6 +36,7 @@ export const Register = ({navigation}: AuthStackScreenProps<'Register'>) => {
     })
       .unwrap()
       .then(response => {
+        console.log(response, 'API RESPONSE');
         navigation.navigate('ConfirmEmail', {
           id: response.data.id,
           email: response.data.email,
@@ -46,7 +47,9 @@ export const Register = ({navigation}: AuthStackScreenProps<'Register'>) => {
           },
         });
       })
-      .catch(() => {});
+      .catch(e => {
+        console.log(e, 'Err');
+      });
   };
 
   const registerSchema = object({

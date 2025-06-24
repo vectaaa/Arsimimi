@@ -17,17 +17,13 @@ import {getSessionID} from '../Utils/storage/authStorage';
 import {logout} from '../Utils/logout';
 
 const SPECIFIC_RESPONSE_CODE_URLS = [`${ENV.API_URL}${ENDPOINTS.LOGIN}`];
+console.log(SPECIFIC_RESPONSE_CODE_URLS, 'rer');
 
 const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
   baseUrl: ENV.API_URL,
-  prepareHeaders: async (
-    headers,
-    {
-      /*getState , endpoint*/
-    },
-  ) => {
+  prepareHeaders: async (headers, {getState, endpoint}) => {
     const sessionId = await getSessionID();
 
     sessionId && headers.set('sessionID', sessionId);

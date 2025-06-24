@@ -83,8 +83,8 @@ const reducers = combineReducers({
   // When adding new slice add clear slice to clearUserData() except persistConfig
   startup,
   common: commonSlice,
-  profile: profileSlice,
-  catalogs: catalogsSlice,
+  // profile: profileSlice,
+  // catalogs: catalogsSlice,
   user: userSlice,
   // Services
   // When adding new service add it to services array inside clearRTKQueryCache()

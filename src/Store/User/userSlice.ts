@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {UserState} from './types';
-const initiateState: UserState = {
+const initialState: UserState = {
   name: '',
   ageRange: '',
   guardianEmail: '',
@@ -13,12 +13,21 @@ const initiateState: UserState = {
   learningGoals: [''],
   learningTime: '',
   canNotify: false,
+  email: '',
+  devices: [],
 };
 
 export const userSlice = createSlice({
-    name: 'user',
-    initialState,
-    reducers: { 
-        
-    }
-}) 
+  name: 'user',
+  initialState,
+  reducers: {
+    setUser: (state, action: PayloadAction<Partial<UserState>>) => ({
+      ...state,
+      ...action.payload,
+    }),
+    resetUserSlice: () => initialState,
+  },
+});
+
+export const {setUser, resetUserSlice} = userSlice.actions;
+export default userSlice.reducer;

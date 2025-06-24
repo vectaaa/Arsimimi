@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
+    "ral": "SET ENVFILE=.env.local && react-native run-android",
+    "rad": "SET ENVFILE=.env.dev && react-native run-android",
+    "rap": "SET ENVFILE=.env.prod && react-native run-android",
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
@@ -48,6 +51,9 @@
     "react-native-swipe-list-view": "^3.2.9",
     "react-native-tab-view": "^3.5.2",
     "react-redux": "^9.2.0",
+    "reactotron-core-client": "2.9.4",
+    "reactotron-react-native": "^5.1.13",
+    "reactotron-redux": "^3.2.0",
     "redux-persist": "^6.0.0",
     "text-encoding": "^0.7.0",
     "yup": "^1.4.0"

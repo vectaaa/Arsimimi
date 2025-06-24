@@ -64,6 +64,7 @@ export type LearningGoal =
 
 export type RegistrationCompleteData = {
   name: string;
+  email: string;
   ageRange: string;
   guardianEmail: string;
   agreeToTerms: string;
@@ -74,7 +75,7 @@ export type RegistrationCompleteData = {
   goalDescription: string;
   learningGoals: string[];
   learningTime: string;
-  canNotify: string;
+  canNotify: boolean;
 };
 export type RegistrationCompleteResponse = GenericResponse;
 
@@ -89,36 +90,20 @@ export type LoginLookupData = {
 };
 
 export type UserData = {
-  fullname: string;
-  accountNumber: string;
-  phoneNumber: string;
+  name: string;
   email: string;
-  bvn: string;
-  lastLoginTime: string;
-  custNo: string;
-  mpinChangeRequired: boolean;
-  tpinChangeRequired: boolean;
-  myDevice: boolean;
-  registeredDeviceCount: number;
-  maxDeviceCountAllowed: number;
-  deviceTied: boolean;
-  transactionLimit: number;
-  userTransactionLimit: number;
-  signedIndemnity: boolean;
+  ageRange: string;
+  guardianEmail: string;
+  agreeToTerms: boolean;
+  nameOfSchool: string;
+  educationLevel: string;
+  grade: string;
+  examTypes: string[];
+  goalDescription: string;
+  learningGoals: string[];
+  learningTime: string;
+  canNotify: boolean;
   devices: Device[];
-  authID: string;
-  profileImage: ProfileImage;
-  transactional: boolean;
-  kycLevel: number;
-  mbppVersion: number;
-  dateOfBirth: string;
-  intstitutionKycLevel: number;
-  acceptedTermsVersion: number;
-  acceptedPrivacyVersion: number;
-  localTxnDailyLimitAmount: number;
-  localPinPerTransactionAmount: number;
-  pinPerTransactionAmount: number;
-  loginId: string;
 };
 
 export type LoginData = {

@@ -19,9 +19,9 @@ export type RootStackScreenProps<T extends keyof RootStackParamList> =
 export type AuthStackParamList = {
   Onboarding: undefined;
   Register: undefined;
-  ConfirmEmail: undefined;
+  ConfirmEmail: {id: number; email: string; onContinue: (otp: string) => void};
   PersonalRegistration: undefined;
-  LearningProfileOne: undefined;
+  LearningProfileOne: {otp: string};
   LearningProfileTwo: undefined;
   LearningTime: undefined;
   LoginScreen: undefined;
@@ -52,8 +52,8 @@ export type AppTabScreenProps<T extends keyof AppTabParamList> =
 export type HomeStackParamList = {
   Dashboard: undefined;
   HomeStack: NavigatorScreenParams<AppTabParamList>;
-  PracticeTest: undefined,
-  ExamMode: undefined,
+  PracticeTest: undefined;
+  ExamMode: undefined;
 };
 export type HomeStackScreenProps<T extends keyof HomeStackParamList> =
   CompositeScreenProps<
@@ -71,10 +71,9 @@ export type ActivityStackScreenProps<T extends keyof ActivityStackParamList> =
     RootStackScreenProps<keyof RootStackParamList>
   >;
 
-
 //CommunityStack
 export type CommunityStackParamList = {
-  Community: undefined
+  Community: undefined;
 };
 export type CommunityStackScreenProps<T extends keyof CommunityStackParamList> =
   CompositeScreenProps<
@@ -104,4 +103,3 @@ export type SettingsStackScreenProps<T extends keyof SettingsStackParamList> =
     NativeStackScreenProps<SettingsStackParamList, T>,
     RootStackScreenProps<keyof RootStackParamList>
   >;
-

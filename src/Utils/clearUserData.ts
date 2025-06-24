@@ -1,6 +1,6 @@
 import {rtkQueryService} from '../Services/api';
 import {store} from '../Store';
-import {resetCatalogsSlice} from '../Store/Catalogs/catalogsSlice';
+// import {resetCatalogsSlice} from '../Store/Catalogs/catalogsSlice';
 import {resetUserSlice} from '../Store/User/userSlice';
 
 import {removeSessionID} from './storage/authStorage';
@@ -12,6 +12,6 @@ export const clearRTKQueryCache = () => {
 export const clearUserData = async () => {
   await removeSessionID();
   store.dispatch(resetUserSlice());
-  store.dispatch(resetCatalogsSlice());
+  // store.dispatch(resetCatalogsSlice());
   clearRTKQueryCache();
 };
