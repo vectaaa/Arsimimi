@@ -9,20 +9,22 @@ import i18next from 'i18next';
 
 import {DEVICE} from '../Constants/Device';
 import {ENDPOINTS} from '../Constants/Endpoints';
-import {ENV} from '../Constants/Env';
+// import {ENV} from '../Constants/Env';
 import {GLOBALS} from '../Constants/Globals';
 import {REQUESTS} from '../Constants/Requests';
 import {addRequest, removeRequest} from '../Store/Common/commonSlice';
 import {getSessionID} from '../Utils/storage/authStorage';
 import {logout} from '../Utils/logout';
 
-const SPECIFIC_RESPONSE_CODE_URLS = [`${ENV.API_URL}${ENDPOINTS.LOGIN}`];
+export const API_URL =
+  'https://redirecter-anjz.onrender.com/tima-service/api/v1/';
+const SPECIFIC_RESPONSE_CODE_URLS = [`${API_URL}${ENDPOINTS.LOGIN}`];
 console.log(SPECIFIC_RESPONSE_CODE_URLS, 'rer');
 
 const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: ENV.API_URL,
+  baseUrl: API_URL,
   prepareHeaders: async (headers, {getState, endpoint}) => {
     const sessionId = await getSessionID();
 
@@ -56,11 +58,14 @@ const responseHandler = (extraOptions: any) => async (response: Response) => {
     throw new Error(result.error);
   }
 
+  if (response.status >= 200 && response.status < 300) {
+    return result;
+  }
+
   if (
     ((result?.code === 0 || result?.responseCode === 0) &&
       !SPECIFIC_RESPONSE_CODE_URLS.includes(response.url)) ||
-    (response.url === `${ENV.API_URL}${ENDPOINTS.LOGIN}` &&
-      result?.code === 22) ||
+    (response.url === `${API_URL}${ENDPOINTS.LOGIN}` && result?.code === 22) ||
     // can't use url, because same url can either require manual error handling or not
     (extraOptions && extraOptions[REQUESTS.MANUAL_ERROR_HANDLE])
   ) {

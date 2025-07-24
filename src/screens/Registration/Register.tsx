@@ -13,6 +13,7 @@ import {styling} from '../../Theme/Styles/GlobalStyles';
 import {IMAGES} from '../../Theme/Images';
 import {PressableOpacity} from '../../components/Buttons/PressebleOpacity';
 import {useRegistrationInitiateMutation} from '../../Services/modules/student';
+import {RegistrationInitiateResponse} from '@/Types/StudentService';
 
 type FormFields = {
   emailAddress: string;
@@ -30,25 +31,26 @@ export const Register = ({navigation}: AuthStackScreenProps<'Register'>) => {
 
   //Where the initiate registration starts
   const onSubmit = (values: FormFields) => {
+    console.log('Submitting form with values:', values);
+
     initiateRegistration({
       email: values.emailAddress,
       password: values.password,
     })
       .unwrap()
-      .then(response => {
-        console.log(response, 'API RESPONSE');
+      .then((response: RegistrationInitiateResponse) => {
+        console.log('API Response ✅:', response.data.id);
+        console.log('API Response ✅:', response.data.email);
+
+        const {id, email} = response.data;
+
         navigation.navigate('ConfirmEmail', {
-          id: response.data.id,
-          email: response.data.email,
-          onContinue: (otp: string) => {
-            navigation.navigate('LearningProfileOne', {
-              otp: otp,
-            });
-          },
+          id,
+          email,
         });
       })
       .catch(e => {
-        console.log(e, 'Err');
+        console.log('Registration error ❌:', e);
       });
   };
 

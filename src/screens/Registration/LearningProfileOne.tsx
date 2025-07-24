@@ -1,23 +1,24 @@
 import React from 'react';
-import {SafeAreaView, FlatList, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {AuthStackScreenProps} from '../../navigation/types';
 import {Field, FieldTypes} from '../../components/FormBuilder/types';
 import StageTwoIcon from '../../assets/Svg/stage2.svg';
 import {FormBuilder} from '../../components/FormBuilder';
 import {useFormRef} from '../../Hooks/formRef';
+import {AppScreen} from '../../components/Screen/AppScreen';
 
 type FormFields = {
   school: string;
   educationLevel: string;
   class: string;
-  examType: string;
+  examType: string[];
 };
 
 const LearningProfileOne = ({
   navigation,
   route,
 }: AuthStackScreenProps<'LearningProfileOne'>) => {
-  const {otp} = route.params;
+  const {payloadStepOne} = route.params;
   const formRef = useFormRef<FormFields>();
 
   const educationLevelOptions = [
@@ -35,8 +36,18 @@ const LearningProfileOne = ({
   ];
 
   const onSubmit = (values: FormFields) => {
+    const payloadStepTwo = {
+      school: values.school,
+      educationLevel: values.educationLevel,
+      class: values.class,
+      examTypes: values.examType,
+    };
     console.log(values, 'form  values');
-    navigation.navigate('LearningProfileTwo');
+    console.log(payloadStepTwo, 'form  values');
+    navigation.navigate('LearningProfileTwo', {
+      payloadStepOne,
+      payloadStepTwo,
+    });
   };
 
   // Dynamic Fields Logic
@@ -79,7 +90,8 @@ const LearningProfileOne = ({
   ];
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <AppScreen>
+      {/* <SafeAreaView style={styles.safeArea}> */}
       <View style={styles.container3}>
         <Text style={styles.logintext}>Learning {'\n'}Profile</Text>
         <View style={styles.iconContainer}>
@@ -87,7 +99,25 @@ const LearningProfileOne = ({
         </View>
       </View>
 
-      <FlatList
+      <View style={styles.formContainer}>
+        <View>
+          <FormBuilder<FormFields>
+            formRef={formRef}
+            fields={formFields}
+            initialValues={{
+              school: '',
+              educationLevel: '',
+              class: '',
+              examType: [],
+            }}
+            onSubmit={onSubmit}
+            submitButtonText="Next"
+            submitButtonStyle={[styles.buttonContainer]}
+          />
+        </View>
+      </View>
+
+      {/* <FlatList
         data={[]} // No list items since we're only using header
         ListHeaderComponent={
           <View style={styles.formContainer}>
@@ -107,8 +137,9 @@ const LearningProfileOne = ({
         }
         ListFooterComponent={<View style={{height: 50}} />}
         contentContainerStyle={{paddingBottom: 100}}
-      />
-    </SafeAreaView>
+      /> */}
+      {/* </SafeAreaView> */}
+    </AppScreen>
   );
 };
 
@@ -123,8 +154,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingLeft: 15,
-    paddingHorizontal: 5,
   },
   logintext: {
     fontFamily: 'georgiab',

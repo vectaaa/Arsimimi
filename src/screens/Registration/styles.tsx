@@ -62,15 +62,12 @@ export const styles = StyleSheet.create({
     paddingTop: 20,
     justifyContent: 'center',
     alignContent: 'center',
-    paddingHorizontal: 5,
-    paddingLeft: 15,
-    paddingRight: 15,
     // backgroundColor: '#fff',
   },
 
   studentText: {
     fontFamily: 'georgia',
-    fontSize: 17, 
+    fontSize: 17,
     fontWeight: '400', // Bold text for emphasis
     color: '#A35200', // Use a prominent color
   },

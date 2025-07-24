@@ -22,17 +22,15 @@ export type ResendResetPasswordOtpData = {
 };
 
 export type ResendOtpData = {
-  institutionCD: string;
-  otpType: OtpType;
-  username: string;
-  deviceId: string;
+  email: string;
 };
 
 //Arsimimi types
-export type RegistrationInitiateData = {
+export type ResendOtpResponse = {
   email: string;
-  password: string;
 };
+export type RegistrationInitiateData = GenericResponse;
+
 export type RegistrationInitiateResponse = GenericResponse & {
   data: {
     id: number;
@@ -64,17 +62,17 @@ export type LearningGoal =
 
 export type RegistrationCompleteData = {
   name: string;
-  email: string;
+  // email: string;
   ageRange: string;
   guardianEmail: string;
-  agreeToTerms: string;
+  agreeToTerms: boolean;
   nameOfSchool: string;
   educationLevel: string;
   grade: string;
   examTypes: string[];
   goalDescription: string;
   learningGoals: string[];
-  learningTime: string;
+  learningTime: number;
   canNotify: boolean;
 };
 export type RegistrationCompleteResponse = GenericResponse;

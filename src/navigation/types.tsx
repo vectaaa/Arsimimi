@@ -19,11 +19,48 @@ export type RootStackScreenProps<T extends keyof RootStackParamList> =
 export type AuthStackParamList = {
   Onboarding: undefined;
   Register: undefined;
-  ConfirmEmail: {id: number; email: string; onContinue: (otp: string) => void};
+  ConfirmEmail: {id: number; email: string; onContinue?: (otp: string) => void};
   PersonalRegistration: undefined;
-  LearningProfileOne: {otp: string};
-  LearningProfileTwo: undefined;
-  LearningTime: undefined;
+  LearningProfileOne: {
+    payloadStepOne: {
+      name: string;
+      ageRange: string;
+      guardianEmail: string;
+      agree: boolean;
+    };
+  };
+  LearningProfileTwo: {
+    payloadStepOne: {
+      name: string;
+      ageRange: string;
+      guardianEmail: string;
+      agree: boolean;
+    };
+    payloadStepTwo: {
+      school: string;
+      educationLevel: string;
+      class: string;
+      examTypes: string[];
+    };
+  };
+  LearningTime: {
+    payloadStepOne: {
+      name: string;
+      ageRange: string;
+      guardianEmail: string;
+      agree: boolean;
+    };
+    payloadStepTwo: {
+      school: string;
+      educationLevel: string;
+      class: string;
+      examTypes: string[];
+    };
+    payloadStepThree: {
+      learningGoals: string;
+      learningGoalSet: string[];
+    };
+  };
   LoginScreen: undefined;
   Dashboard: undefined;
 };

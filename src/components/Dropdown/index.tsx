@@ -12,7 +12,8 @@ type DropdownProps = {
   options: DropdownItem[];
   label: string;
   value: string | null;
-  onChange: (item: DropdownItem) => void;
+  // onChange: (item: DropdownItem) => void;
+  onChange: (value: string) => void;
 };
 
 const DropdownComponent = ({

@@ -6,6 +6,7 @@ const LOGIN = AUTH_SERVICE + 'login';
 const REGISTER_INITIATE = AUTH_SERVICE + 'register';
 const VALIDATE_OTP = AUTH_SERVICE + 'validate-otp';
 const CREATE_USER = 'students';
+const RESEND_OTP = AUTH_SERVICE + 'reset-password';
 
 //USER SERVICE
 const USER_SERVICE = '';
@@ -16,4 +17,5 @@ export const ENDPOINTS = {
   LOGIN,
   REGISTER_INITIATE,
   CREATE_USER,
+  RESEND_OTP,
 };

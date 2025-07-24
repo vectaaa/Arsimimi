@@ -1,13 +1,9 @@
 import {ENDPOINTS} from '../../Constants/Endpoints';
-import {REQUESTS} from '../../Constants/Requests';
 import {rtkQueryService} from '../api';
-import {GenericResponse} from '../../Types/Common';
-import {toUpperFirstSign} from '../../Utils/formatters';
 import type * as Types from '../../Types/StudentService';
-import { ENV } from '../../Constants/Env';
+import {API_URL} from '../api';
 
-
-console.log(ENV.API_URL, 'URL')
+console.log(API_URL, 'URL');
 export const studentApi = rtkQueryService.injectEndpoints({
   endpoints: build => ({
     //mutation
@@ -16,9 +12,6 @@ export const studentApi = rtkQueryService.injectEndpoints({
       Types.RegistrationInitiateData
     >({
       query: body => {
-        const fullUrl = `${ENV.API_URL}${ENDPOINTS.REGISTER_INITIATE}`;
-        console.log('[RegistrationInitiate] Request URL:', fullUrl);
-        console.log('[RegistrationInitiate] Request Body:', body);
         return {
           url: ENDPOINTS.REGISTER_INITIATE,
           method: 'POST',
@@ -38,11 +31,13 @@ export const studentApi = rtkQueryService.injectEndpoints({
       }),
     }),
 
-    // resendOtp: build.mutation<>({
-    //   query: body => ({
-    //     url: ENDPOINTS.
-    //   }),
-    // }),
+    resendOtp: build.mutation<Types.ResendOtpResponse, Types.ResendOtpData>({
+      query: body => ({
+        url: ENDPOINTS.RESEND_OTP,
+        method: 'POST',
+        body,
+      }),
+    }),
 
     registrationComplete: build.mutation<
       Types.RegistrationCompleteResponse,
@@ -62,5 +57,6 @@ export const {
   //mutation
   useRegistrationInitiateMutation,
   useValidateOtpMutation,
+  useResendOtpMutation,
   useRegistrationCompleteMutation,
 } = studentApi;
