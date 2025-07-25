@@ -11,6 +11,11 @@ import StageFourIcon from '../../assets/Svg/stage4.svg';
 import GlobeIcon from '../../assets/Svg/Globe.svg';
 import Slider from '@react-native-community/slider';
 import {COLORS} from '../../Theme/Colors';
+import {useRegistrationCompleteMutation} from '../../Services/modules/student';
+import {AuthStackScreenProps} from '@/navigation/types';
+import {PressableOpacity} from '../../components/Buttons/PressebleOpacity';
+import {RegistrationCompleteResponse} from '@/Types/StudentService';
+import {CommonActions} from '@react-navigation/native';
 
 const createStyles = (isSmallDevice: boolean, width: number) =>
   StyleSheet.create({
@@ -74,16 +79,66 @@ const createStyles = (isSmallDevice: boolean, width: number) =>
     },
   });
 
-const LearningTime = () => {
+const LearningTime = ({
+  navigation,
+  route,
+}: AuthStackScreenProps<'LearningTime'>) => {
   const {width} = useWindowDimensions();
   const isSmallDevice = width < 375;
   const styles = createStyles(isSmallDevice, width);
   const [selectedHour, setSelectedHour] = useState(0);
-
+  const [canNotify, setCanNotify] = useState(false);
+  const {payloadStepOne, payloadStepTwo, payloadStepThree} = route.params;
+  const [registrationComplete] = useRegistrationCompleteMutation();
   const formatHour = (hour: number) => {
     const period = hour >= 12 ? 'PM' : 'AM';
     const formattedHour = hour % 12 === 0 ? 12 : hour % 12;
     return `${formattedHour} ${period}`;
+  };
+
+  const navigateToDashboard = () => {
+    navigation.dispatch(
+      CommonActions.reset({
+        routes: [{name: 'App'}],
+      }),
+    );
+  };
+  const onSubmit = () => {
+    const payloadd = {
+      name: payloadStepOne?.name,
+      ageRange: payloadStepOne?.ageRange,
+      guardianEmail: payloadStepOne?.guardianEmail,
+      agreeToTerms: payloadStepOne?.agree,
+      nameOfSchool: payloadStepTwo?.school,
+      educationLevel: payloadStepTwo?.educationLevel,
+      grade: payloadStepTwo?.class,
+      examTypes: payloadStepTwo?.examTypes,
+      goalDescription: payloadStepThree?.learningGoals,
+      learningGoals: payloadStepThree?.learningGoalSet,
+      learningTime: selectedHour,
+      canNotify: true,
+    };
+
+    console.log(payloadd, 'New load');
+    registrationComplete({
+      name: payloadStepOne?.name,
+      ageRange: payloadStepOne?.ageRange,
+      guardianEmail: payloadStepOne?.guardianEmail,
+      agreeToTerms: payloadStepOne?.agree,
+      nameOfSchool: payloadStepTwo?.school,
+      educationLevel: payloadStepTwo?.educationLevel,
+      grade: payloadStepTwo?.class,
+      examTypes: payloadStepTwo?.examTypes,
+      goalDescription: payloadStepThree?.learningGoals,
+      learningGoals: payloadStepThree?.learningGoalSet,
+      learningTime: selectedHour,
+      canNotify: true,
+    })
+      .unwrap()
+      .then((res: RegistrationCompleteResponse) => {
+        navigateToDashboard();
+      })
+      .catch();
   };
 
   return (
@@ -124,9 +179,26 @@ const LearningTime = () => {
             <Text style={styles.label}>09:00</Text>
           </View>
         </View>
+
+        <PressableOpacity
+          onPress={onSubmit}
+          style={stylesB.button}
+          testingSuffix={''}
+        />
       </ScrollView>
     </SafeAreaView>
   );
 };
 
 export default LearningTime;
+
+const stylesB = StyleSheet.create({
+  button: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 48,
+    width: '100%',
+    backgroundColor: COLORS.ORANGE_NORMAL,
+    borderRadius: 4,
+  },
+});

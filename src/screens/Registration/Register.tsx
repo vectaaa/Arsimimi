@@ -1,5 +1,5 @@
 import {View, Text, Platform, Image, Dimensions} from 'react-native';
-import React from 'react';
+import * as React from 'react';
 import {AuthStackScreenProps} from '../../navigation/types';
 import {object} from 'yup';
 import {VALIDATION} from '../../Constants/Validation';
@@ -12,7 +12,8 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {styling} from '../../Theme/Styles/GlobalStyles';
 import {IMAGES} from '../../Theme/Images';
 import {PressableOpacity} from '../../components/Buttons/PressebleOpacity';
-
+import {useRegistrationInitiateMutation} from '../../Services/modules/student';
+import {RegistrationInitiateResponse} from '@/Types/StudentService';
 
 type FormFields = {
   emailAddress: string;
@@ -26,11 +27,31 @@ export const Register = ({navigation}: AuthStackScreenProps<'Register'>) => {
   const screenDiagonal = Math.sqrt(width * width + height * height) / 160;
 
   const formRef = useFormRef<FormFields>();
+  const [initiateRegistration] = useRegistrationInitiateMutation();
 
   //Where the initiate registration starts
   const onSubmit = (values: FormFields) => {
-    console.log(values, 'form values');
-    navigation.navigate('ConfirmEmail');
+    console.log('Submitting form with values:', values);
+
+    initiateRegistration({
+      email: values.emailAddress,
+      password: values.password,
+    })
+      .unwrap()
+      .then((response: RegistrationInitiateResponse) => {
+        console.log('API Response ✅:', response.data.id);
+        console.log('API Response ✅:', response.data.email);
+
+        const {id, email} = response.data;
+
+        navigation.navigate('ConfirmEmail', {
+          id,
+          email,
+        });
+      })
+      .catch(e => {
+        console.log('Registration error ❌:', e);
+      });
   };
 
   const registerSchema = object({

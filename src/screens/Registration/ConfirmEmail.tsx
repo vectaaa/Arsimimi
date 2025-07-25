@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {Alert, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {styles} from './styles';
 
@@ -6,6 +6,12 @@ import {AuthStackScreenProps} from '../../navigation/types';
 import {PinInput} from '../../components/Inputs/PinInput';
 import {COLORS} from '../../Theme/Colors';
 import {PressableOpacity} from '../../components/Buttons/PressebleOpacity';
+import {AppScreen} from '../../components/Screen/AppScreen';
+import {
+  useResendOtpMutation,
+  useValidateOtpMutation,
+} from '../../Services/modules/student';
+import {ResendOtpResponse, ValidateOtpResponse} from '@/Types/StudentService';
 
 export type ConfirmEmailProps = {
   onContinue: (pin: number) => void;
@@ -18,57 +24,83 @@ const ConfirmEmail = ({
   // const {onContinue, barLength} = route.params;
 
   const [pinValue, setPinValue] = useState('');
-  // const handleContinue = () => {
-  //     navigation.navigate();
-  // };
+  const [validateOtp] = useValidateOtpMutation();
+  const [resendOtp] = useResendOtpMutation();
+  // const {id, email, otp} = route.params;
 
   const handleContinue = () => {
-    navigation.navigate('PersonalRegistration');
+    if (pinValue.length < 4) {
+      Alert.alert('Invalid OTP length');
+    }
+    validateOtp({
+      email: route.params.email,
+      otp: pinValue,
+    })
+      .unwrap()
+      .then((response: ValidateOtpResponse) => {
+        console.log('Verification Success', response);
+
+        navigation.navigate('PersonalRegistration');
+      })
+      .catch(error => {
+        console.log('Verification Failed', error);
+        Alert.alert('Verification Failed', 'The OTP you entered is incorrect.');
+      });
   };
 
-  //   barLength,
-  //   currentIndex,
-  //   pin: pinValue,
-  //   onContinue: onContinue,
-  //   showIcon,
+  const resendOtpContinue = () => {
+    resendOtp({
+      email: route.params.email,
+    })
+      .unwrap()
+      .then((response: ResendOtpResponse) => {
+        console.log('Verification Success', response);
+        Alert.alert('An OTP has been sent to your email.');
+      })
+      .catch(error => {
+        Alert.alert('Error', error);
+      });
+  };
 
   return (
-    <View style={styles.container2}>
-      <Text style={styles.logintext}>Confirm Email</Text>
-      <View style={styles.textContainer}>
-        <Text style={styles.digitText}>
-          A 6 digit code has been sent to your mailbox
-        </Text>
-      </View>
-
-      <View>
-        <PinInput
-          pin={pinValue}
-          length={6}
-          autoFocus
-          onPinChange={setPinValue}
-          containerStyle={styles.pinContainer}
-          pinBoxStyle={stylesConfirmEmail.spacer}
-        />
-        <View style={stylesConfirmEmail.resendOtpTextView}>
-          <PressableOpacity testingSuffix={''} onPress={handleContinue}>
-            <Text style={stylesConfirmEmail.resendOtpText}>Resend Code</Text>
-          </PressableOpacity>
+    <AppScreen>
+      <View style={styles.container2}>
+        <Text style={styles.logintext}>Confirm Email</Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.digitText}>
+            A 6 digit code has been sent to your mailbox
+          </Text>
         </View>
-      </View>
 
-      <PressableOpacity
-        onPress={handleContinue}
-        style={[
-          stylesConfirmEmail.button,
-          pinValue.length != 6
-            ? stylesConfirmEmail.buttonDisabled
-            : stylesConfirmEmail.button,
-        ]}
-        testingSuffix={''}>
-        <Text style={stylesConfirmEmail.confirmText}>Confirm Code</Text>
-      </PressableOpacity>
-    </View>
+        <View>
+          <PinInput
+            pin={pinValue}
+            length={6}
+            autoFocus
+            onPinChange={setPinValue}
+            containerStyle={styles.pinContainer}
+            pinBoxStyle={stylesConfirmEmail.spacer}
+          />
+          <View style={stylesConfirmEmail.resendOtpTextView}>
+            <PressableOpacity testingSuffix={''} onPress={resendOtpContinue}>
+              <Text style={stylesConfirmEmail.resendOtpText}>Resend Code</Text>
+            </PressableOpacity>
+          </View>
+        </View>
+
+        <PressableOpacity
+          onPress={handleContinue}
+          style={[
+            stylesConfirmEmail.button,
+            pinValue.length !== 6
+              ? stylesConfirmEmail.buttonDisabled
+              : stylesConfirmEmail.button,
+          ]}
+          testingSuffix={''}>
+          <Text style={stylesConfirmEmail.confirmText}>Confirm Code</Text>
+        </PressableOpacity>
+      </View>
+    </AppScreen>
   );
 };
 

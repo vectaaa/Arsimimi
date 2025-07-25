@@ -19,11 +19,48 @@ export type RootStackScreenProps<T extends keyof RootStackParamList> =
 export type AuthStackParamList = {
   Onboarding: undefined;
   Register: undefined;
-  ConfirmEmail: undefined;
+  ConfirmEmail: {id: number; email: string; onContinue?: (otp: string) => void};
   PersonalRegistration: undefined;
-  LearningProfileOne: undefined;
-  LearningProfileTwo: undefined;
-  LearningTime: undefined;
+  LearningProfileOne: {
+    payloadStepOne: {
+      name: string;
+      ageRange: string;
+      guardianEmail: string;
+      agree: boolean;
+    };
+  };
+  LearningProfileTwo: {
+    payloadStepOne: {
+      name: string;
+      ageRange: string;
+      guardianEmail: string;
+      agree: boolean;
+    };
+    payloadStepTwo: {
+      school: string;
+      educationLevel: string;
+      class: string;
+      examTypes: string[];
+    };
+  };
+  LearningTime: {
+    payloadStepOne: {
+      name: string;
+      ageRange: string;
+      guardianEmail: string;
+      agree: boolean;
+    };
+    payloadStepTwo: {
+      school: string;
+      educationLevel: string;
+      class: string;
+      examTypes: string[];
+    };
+    payloadStepThree: {
+      learningGoals: string;
+      learningGoalSet: string[];
+    };
+  };
   LoginScreen: undefined;
   Dashboard: undefined;
 };
@@ -50,8 +87,10 @@ export type AppTabScreenProps<T extends keyof AppTabParamList> =
 
 //Homestack
 export type HomeStackParamList = {
-  // Dashboard: undefined;
+  Dashboard: undefined;
   HomeStack: NavigatorScreenParams<AppTabParamList>;
+  PracticeTest: undefined;
+  ExamMode: undefined;
 };
 export type HomeStackScreenProps<T extends keyof HomeStackParamList> =
   CompositeScreenProps<
@@ -69,10 +108,9 @@ export type ActivityStackScreenProps<T extends keyof ActivityStackParamList> =
     RootStackScreenProps<keyof RootStackParamList>
   >;
 
-
 //CommunityStack
 export type CommunityStackParamList = {
-  Community: undefined
+  Community: undefined;
 };
 export type CommunityStackScreenProps<T extends keyof CommunityStackParamList> =
   CompositeScreenProps<
@@ -83,6 +121,9 @@ export type CommunityStackScreenProps<T extends keyof CommunityStackParamList> =
 //Help
 export type HelpStackParamList = {
   Help: undefined;
+  CallUs: undefined;
+  ChatWithUs: undefined;
+  Faqs: undefined;
 };
 export type HelpStackScreenProps<T extends keyof HelpStackParamList> =
   CompositeScreenProps<
@@ -99,4 +140,3 @@ export type SettingsStackScreenProps<T extends keyof SettingsStackParamList> =
     NativeStackScreenProps<SettingsStackParamList, T>,
     RootStackScreenProps<keyof RootStackParamList>
   >;
-

@@ -59,7 +59,7 @@ const RenderScrollView = (wrapperChildren: React.ReactNode) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: COLORS.WHITE,
+    backgroundColor: COLORS.BACKGROUND_COLOR,
     ...styling.flexGrow,
   },
 });

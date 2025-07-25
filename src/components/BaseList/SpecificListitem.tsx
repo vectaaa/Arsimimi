@@ -5,7 +5,7 @@ import { COLORS } from '../../Theme/Colors';
 import { styles } from '../../screens/Registration/styles';
 import { styling } from '../../Theme/Styles/GlobalStyles';
 import { Spacer } from '../Spacer';
-import { SecurityQuestion } from '../../Types/CustomerService';
+import { SecurityQuestion } from '../../Types/StudentService';
 
 type SecurityQuestionItemProps = {
     item: SecurityQuestion;

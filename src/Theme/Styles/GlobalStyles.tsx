@@ -11,11 +11,30 @@ export const styling = StyleSheet.create({
     marginBottom: 24,
   },
   borderRadius: {
-    borderRadius: 6,
+    borderRadius: 4,
   },
   boxHeight: {
     height: 168,
   },
+  font: {
+    fontFamily: 'georgiab',
+    color: COLORS.ORANGE_THICK,
+    fontSize: 20,
+  },
+  descText: {
+    fontFamily: 'georgia',
+    fontWeight: '400',
+    fontSize: 12,
+    lineHeight: 15,
+    color: COLORS.DARK_GRAY,
+    marginTop: 8,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  padding: {paddingTop: 24},
   shadow: {
     ...Platform.select({
       ios: {

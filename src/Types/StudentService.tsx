@@ -1,8 +1,8 @@
-import { SelectedSecurityQuestion } from '@/Components/FormBuilder/SecurityQuestionsForm';
-import { Account, ProfileImage } from './Account';
-import { GenericResponse, ImageType } from './Common';
-import { Device } from './Device';
-import { BankTransaction, Transaction, TransactionType } from './Transaction';
+import {SelectedSecurityQuestion} from '@/Components/FormBuilder/SecurityQuestionsForm';
+import {Account, ProfileImage} from './Account';
+import {GenericResponse, ImageType} from './Common';
+import {Device} from './Device';
+import {BankTransaction, Transaction, TransactionType} from './Transaction';
 
 // USED TYPES
 export enum OtpType {
@@ -11,13 +11,6 @@ export enum OtpType {
   DEVICE_BIND_OTP = 'DEVICE_BIND_OTP',
   ACCOUNT_OPENING = 'ACCOUNT_OPENING',
 }
-
-export type ValidateOtpData = {
-  deviceId: string;
-  otp: string;
-  bvn: string;
-};
-export type ValidateOtpResponse = GenericResponse & { regOtpCode: string };
 
 export type ResendTargetedOtpData = {
   deviceId: string;
@@ -29,46 +22,62 @@ export type ResendResetPasswordOtpData = {
 };
 
 export type ResendOtpData = {
-  institutionCD: string;
-  otpType: OtpType;
-  username: string;
-  deviceId: string;
+  email: string;
 };
 
-export type RegistrationInitiateData = {
-  deviceId: string;
-  accountNumber: string;
-  phoneNumber: string;
-  institutionCD: string;
-  longitude: string;
-  latitide: string;
-  deviceModel: string;
-};
-export type RegistrationInitiateResponse = GenericResponse & {
-  kycLevel: number;
-  accountNumber: string;
-  phoneNumber: string;
+//Arsimimi types
+export type ResendOtpResponse = {
   email: string;
-  onboardMode: number;
-  custNo: string;
-  dateOfBirth: string;
 };
+export type RegistrationInitiateData = GenericResponse;
+
+export type RegistrationInitiateResponse = GenericResponse & {
+  data: {
+    id: number;
+    email: string;
+  };
+};
+
+export type ValidateOtpData = {
+  email: string;
+  otp: string;
+};
+export type ValidateOtpResponse = GenericResponse & {
+  data: {
+    accessToken: string;
+    email: string;
+  };
+};
+
+export type ExamType =
+  | ' Primary School '
+  | ' Junior Secondary School'
+  | ' Senior Secondary School'
+  | ' Professional Exam';
+export type LearningGoal =
+  | '15-20 mins daily'
+  | '20-45 mins daily'
+  | '1 hour daily'
+  | 'More than 1 hour daily';
 
 export type RegistrationCompleteData = {
-  deviceId: string;
-  deviceModel: string;
-  deviceName: string;
-  institutionCD: string;
-  mpin: string;
-  transactionPin: string;
-  username: string;
-  otp: string;
-  onboardMode: string;
-  securityQuestions: SelectedSecurityQuestion;
-  longitude: string;
-  latitude: string;
+  name: string;
+  // email: string;
+  ageRange: string;
+  guardianEmail: string;
+  agreeToTerms: boolean;
+  nameOfSchool: string;
+  educationLevel: string;
+  grade: string;
+  examTypes: string[];
+  goalDescription: string;
+  learningGoals: string[];
+  learningTime: number;
+  canNotify: boolean;
 };
 export type RegistrationCompleteResponse = GenericResponse;
+
+//End of Arsimimi//
 
 export type LoginLookupResponse = GenericResponse & {
   available: boolean;
@@ -79,36 +88,20 @@ export type LoginLookupData = {
 };
 
 export type UserData = {
-  fullname: string;
-  accountNumber: string;
-  phoneNumber: string;
+  name: string;
   email: string;
-  bvn: string;
-  lastLoginTime: string;
-  custNo: string;
-  mpinChangeRequired: boolean;
-  tpinChangeRequired: boolean;
-  myDevice: boolean;
-  registeredDeviceCount: number;
-  maxDeviceCountAllowed: number;
-  deviceTied: boolean;
-  transactionLimit: number;
-  userTransactionLimit: number;
-  signedIndemnity: boolean;
+  ageRange: string;
+  guardianEmail: string;
+  agreeToTerms: boolean;
+  nameOfSchool: string;
+  educationLevel: string;
+  grade: string;
+  examTypes: string[];
+  goalDescription: string;
+  learningGoals: string[];
+  learningTime: string;
+  canNotify: boolean;
   devices: Device[];
-  authID: string;
-  profileImage: ProfileImage;
-  transactional: boolean;
-  kycLevel: number;
-  mbppVersion: number;
-  dateOfBirth: string;
-  intstitutionKycLevel: number;
-  acceptedTermsVersion: number;
-  acceptedPrivacyVersion: number;
-  localTxnDailyLimitAmount: number;
-  localPinPerTransactionAmount: number;
-  pinPerTransactionAmount: number;
-  loginId: string;
 };
 
 export type LoginData = {
@@ -128,14 +121,18 @@ export type LoginResponse = GenericResponse &
     sessionID: string;
   };
 
-export type AccountsGetData = { accountNumber: string };
+export type AccountsGetData = {accountNumber: string};
 export type AccountsGetResponse = GenericResponse & {
   accounts: Account[];
   custNo: string;
   totalAvailableBalance: number;
 };
 // PRESET TYPES
-export type GenericChangePinData = { tpin: string; newTPin: string; confirmTPin: string };
+export type GenericChangePinData = {
+  tpin: string;
+  newTPin: string;
+  confirmTPin: string;
+};
 
 export type Location = {
   name: string;
@@ -161,7 +158,11 @@ export type ResetTransactionPinData = {
   authorizationString: string;
 };
 
-export type ChangePasswordData = { mpin: string; newMPin: string; confirmMPin: string };
+export type ChangePasswordData = {
+  mpin: string;
+  newMPin: string;
+  confirmMPin: string;
+};
 
 export type InitiateResetPasswordData = {
   accountNumber: string;
@@ -238,7 +239,7 @@ export type OpenAccountResponse = GenericResponse & {
   custNo: string;
 };
 
-export type ValidatePinData = { accountNumber: string; transactionPin: string };
+export type ValidatePinData = {accountNumber: string; transactionPin: string};
 
 export type ResetPinData = {
   newTPin: string;

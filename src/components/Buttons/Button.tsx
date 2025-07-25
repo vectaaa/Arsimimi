@@ -1,12 +1,15 @@
 import React from 'react';
-import { ColorValue, View } from 'react-native';
-import { StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
-import { COLORS } from '../../Theme/Colors';
-import { Typography } from '../../components/Typography';
-import { LoadingSpinner } from '../../components/LoadingSpinner';
-import { Spacer } from '../../components/Spacer';
-import { PressableOpacity, PressableOpacityProps } from '../Buttons/PressebleOpacity';
-import { styling } from '../../Theme/Styles/GlobalStyles';
+import {ColorValue, View} from 'react-native';
+import {StyleProp, StyleSheet, TextStyle, ViewStyle} from 'react-native';
+import {COLORS} from '../../Theme/Colors';
+import {Typography} from '../../components/Typography';
+import {LoadingSpinner} from '../../components/LoadingSpinner';
+import {Spacer} from '../../components/Spacer';
+import {
+  PressableOpacity,
+  PressableOpacityProps,
+} from '../Buttons/PressebleOpacity';
+import {styling} from '../../Theme/Styles/GlobalStyles';
 
 export type ButtonProps = PressableOpacityProps & {
   title?: string;
@@ -42,24 +45,33 @@ export const Button = ({
 
   const buttonContainerStyles = StyleSheet.flatten([
     styles.buttonContainer,
-    small && { alignItems: 'center' },
+    small && {alignItems: 'center'},
     style,
   ]);
 
   const buttonStyles = StyleSheet.flatten([
     styles.button,
-    { backgroundColor: color ? color : COLORS.ORANGE_NORMAL },
-    disabled && { backgroundColor: COLORS.ORANGE_LIGHT },
-    outline && { ...styles.outline, borderColor: color ? color : COLORS.TEAL_NORMAL },
+    {backgroundColor: color ? color : COLORS.ORANGE_NORMAL},
+    disabled && {backgroundColor: COLORS.ORANGE_LIGHT},
+    outline && {
+      ...styles.outline,
+      borderColor: color ? color : COLORS.TEAL_NORMAL,
+    },
     round && styles.round,
     buttonStyle,
   ]);
 
-  const buttonContentStyles = StyleSheet.flatten([styles.buttonContent, buttonContainerStyle]);
+  const buttonContentStyles = StyleSheet.flatten([
+    styles.buttonContent,
+    buttonContainerStyle,
+  ]);
 
   const textStyles = StyleSheet.flatten([
     styles.defaultTextStyle,
-    { color: color && outline ? color : outline ? COLORS.TEAL_NORMAL : COLORS.WHITE },
+    {
+      color:
+        color && outline ? color : outline ? COLORS.TEAL_NORMAL : COLORS.WHITE,
+    },
     textStyle,
   ]);
 
@@ -69,13 +81,16 @@ export const Button = ({
         disabled={disabled || loading}
         style={buttonStyles as ViewStyle}
         {...props}
-        testingSuffix={`${testingSuffix} Button`}
-      >
+        testingSuffix={`${testingSuffix} Button`}>
         <View style={buttonContentStyles}>
           {icon && icon}
           {icon && children && <Spacer width={8} />}
           {buttonText ? (
-            <Typography size={16} weight="400" style={textStyles} numberOfLines={1}>
+            <Typography
+              size={16}
+              weight="400"
+              style={textStyles}
+              numberOfLines={1}>
               {buttonText}
             </Typography>
           ) : (
@@ -86,7 +101,13 @@ export const Button = ({
       {loading && (
         <LoadingSpinner
           size={24}
-          color={color && outline ? color : outline ? COLORS.TEAL_NORMAL : COLORS.WHITE}
+          color={
+            color && outline
+              ? color
+              : outline
+              ? COLORS.TEAL_NORMAL
+              : COLORS.WHITE
+          }
           colorOuterCircle={COLORS.TRANSPARENT}
           hideLogo
           style={styles.loadingIndicator}
@@ -102,12 +123,16 @@ const styles = StyleSheet.create({
   buttonContainer: {
     justifyContent: 'center',
     marginBottom: 24,
+    alignSelf: 'flex-start',
   },
   button: {
     ...styling.borderRadius,
     justifyContent: 'center',
     minHeight: MIN_SIZE,
     padding: 12,
+    paddingHorizontal: 29,
+    paddingVertical: 8,
+    
   },
   buttonContent: {
     flexDirection: 'row',

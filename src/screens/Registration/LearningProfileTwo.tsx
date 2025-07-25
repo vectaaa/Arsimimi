@@ -8,13 +8,15 @@ import {AuthStackScreenProps} from '../../navigation/types';
 
 type FormFields = {
   learningGoals: string;
+  learningGoalSet: string[];
 };
 
 const LearningProfileTwo = ({
   navigation,
+  route,
 }: AuthStackScreenProps<'LearningProfileTwo'>) => {
   const formRef = useFormRef<FormFields>();
-
+  const {payloadStepOne, payloadStepTwo} = route.params;
   const learningGoalTime = [
     '15-20 mins daily',
     '20-45 mins daily',
@@ -44,8 +46,16 @@ const LearningProfileTwo = ({
   ];
 
   const onSubmit = (values: FormFields) => {
+    const payloadStepThree = {
+      learningGoals: values.learningGoals,
+      learningGoalSet: values.learningGoalSet,
+    };
     console.log(values, 'form  values');
-    navigation.navigate('LearningTime');
+    navigation.navigate('LearningTime', {
+      payloadStepOne,
+      payloadStepTwo,
+      payloadStepThree,
+    });
   };
 
   return (

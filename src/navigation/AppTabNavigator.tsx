@@ -32,7 +32,7 @@ export const AppTabNavigator = () => {
       }}>
       <Tab.Screen
         name="Home"
-        component={Dashboard}
+        component={HomeStackNavigator}
         options={{
           tabBarIcon: Icons.HomeIcon,
           tabBarLabel: 'Home',
@@ -62,7 +62,7 @@ export const AppTabNavigator = () => {
       />
       <Tab.Screen
         name="HelpStack"
-        component={Help}
+        component={HelpStackNavigator}
         options={{
           tabBarIcon: Icons.HelpIcon,
           tabBarLabel: 'Help',

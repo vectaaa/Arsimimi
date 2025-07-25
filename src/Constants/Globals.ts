@@ -2,6 +2,7 @@ const ICON_SCALE = 24;
 
 export const GLOBALS = {
   ANDROID_ELEVATION: 4,
+  APP_VERSION: '1',
   ICON_SCALE,
   ICON_SIZE: {
     width: ICON_SCALE,
