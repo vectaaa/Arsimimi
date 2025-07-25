@@ -1,9 +1,8 @@
 import React from 'react';
-import {Image, View} from 'react-native';
 import { PressableOpacity } from '../Buttons/PressebleOpacity';
 import { Typography } from '../Typography';
 import { COLORS } from '../../Theme/Colors';
-import { styles } from '../../Screens/Registration/styles';
+import { styles } from '../../screens/Registration/styles';
 import { styling } from '../../Theme/Styles/GlobalStyles';
 import { Spacer } from '../Spacer';
 import { SecurityQuestion } from '../../Types/CustomerService';

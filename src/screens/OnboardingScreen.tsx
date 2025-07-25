@@ -57,7 +57,7 @@ const slides: SlidesTypes[] = [
   },
 ];
 
-const OnboardingScreen = ({navigation}) => {
+const OnboardingScreen = ({navigation}: any) => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const ref = React.useRef(null);
 
