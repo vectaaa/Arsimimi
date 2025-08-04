@@ -19,7 +19,7 @@ export type ConfirmEmailProps = {
 };
 const ConfirmEmail = ({
   navigation,
-  route,
+  // route,
 }: AuthStackScreenProps<'ConfirmEmail'>) => {
   // const {onContinue, barLength} = route.params;
 
