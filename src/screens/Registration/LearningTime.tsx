@@ -1,4 +1,5 @@
 import {
+  Alert,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -136,9 +137,12 @@ const LearningTime = ({
     })
       .unwrap()
       .then((res: RegistrationCompleteResponse) => {
+        console.log(res);
         navigateToDashboard();
       })
-      .catch();
+      .catch(e => {
+        Alert.alert(e, 'An error occurred');
+      });
   };
 
   return (

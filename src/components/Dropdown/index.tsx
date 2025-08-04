@@ -12,8 +12,8 @@ type DropdownProps = {
   options: DropdownItem[];
   label: string;
   value: string | null;
-  // onChange: (item: DropdownItem) => void;
-  onChange: (value: string) => void;
+  onChange: (item: DropdownItem) => void;
+  // onChange: (value: string) => void;
 };
 
 const DropdownComponent = ({
@@ -45,8 +45,8 @@ const DropdownComponent = ({
         value={value || null} // Safeguard against undefined
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
-        onChange={item => {
-          onChange(item.value);
+        onChange={(item: DropdownItem) => {
+          onChange(item);
           console.log(item.value, 'item');
           // Call the passed onChange handler
           setIsFocus(false);

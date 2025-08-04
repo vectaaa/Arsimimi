@@ -1,31 +1,43 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import {Checkbox} from './Checkbox';
 import {COLORS} from '../../Theme/Colors';
 
 export type CheckBoxFormProps = {
   label: string;
   options: string[];
-  onSelectionChange?: (selected: string) => void;
+  selectedValues?: string[];
+  onSelectionChange?: (selected: string[]) => void;
 };
 
 const CheckBoxForm: React.FC<CheckBoxFormProps> = ({
   label,
   options,
+  selectedValues = [],
   onSelectionChange,
 }) => {
-  const [selectedItems, setSelectedItems] = useState<string>('');
+  // const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
+  // const handleCheckboxPress = (item: string) => {
+  //   if (selectedItems.includes(item)) {
+  //     setSelectedItems('');
+  //     onSelectionChange && onSelectionChange('');
+  //   } else {
+  //     setSelectedItems(item);
+  //     onSelectionChange && onSelectionChange(item);
+  //   }
+  // };
   const handleCheckboxPress = (item: string) => {
-    if (selectedItems.includes(item)) {
-      setSelectedItems('');
-      onSelectionChange && onSelectionChange('');
-    } else {
-      setSelectedItems(item);
-      onSelectionChange && onSelectionChange(item);
-    }
-  };
+    let updatedSelection: string[];
 
+    if (selectedValues.includes(item)) {
+      updatedSelection = selectedValues.filter(i => i !== item);
+    } else {
+      updatedSelection = [...selectedValues, item];
+    }
+
+    onSelectionChange?.(updatedSelection); // notify parent with new array
+  };
   return (
     <View>
       <Text style={styles.labelStyle}>{label}</Text>
@@ -37,7 +49,7 @@ const CheckBoxForm: React.FC<CheckBoxFormProps> = ({
               <View style={styles.innerContainer}>
                 <Checkbox
                   onPress={() => handleCheckboxPress(item)}
-                  isActive={selectedItems.includes(item)}
+                  isActive={selectedValues.includes(item)}
                 />
                 <Text style={styles.textStyle}>{item}</Text>
               </View>

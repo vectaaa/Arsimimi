@@ -49,8 +49,8 @@ export const AuthStackNavigator = () => {
       {isAppFirstLaunched && (
         <Stack.Screen name="Onboarding" component={OnboardingScreen} />
       )}
-      <Stack.Screen name="Register" component={Register} />
-      <Stack.Screen name="ConfirmEmail" component={ConfirmEmail} />
+      {/* <Stack.Screen name="Register" component={Register} />
+      <Stack.Screen name="ConfirmEmail" component={ConfirmEmail} /> */}
       <Stack.Screen
         name="PersonalRegistration"
         component={PersonalRegistration}

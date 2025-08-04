@@ -139,12 +139,21 @@ export function FormBuilder<ReturnType extends FieldValues>({
                       <CheckBoxForm
                         {...(fieldProps as CheckBoxFormProps)}
                         options={(fieldProps as CheckBoxFormProps).options}
+                        label={(fieldProps as CheckBoxFormProps).label}
+                        selectedValues={(values as any)[name] || []}
+                        // selectedValues={
+                        //   (fieldProps as CheckBoxFormProps).selectedValues
+                        // }
+                        // onSelectionChange={selected =>
+                        //   setFieldValue(name, selected)
+                        // }
                         onSelectionChange={selected =>
                           setFieldValue(name, selected)
                         }
                       />
                     );
                     break;
+
                   case FieldTypes.MODAL_SELECTOR:
                     fieldComponent = (
                       <SelectPicker
@@ -199,10 +208,18 @@ export function FormBuilder<ReturnType extends FieldValues>({
                     );
                     break;
                   case FieldTypes.DROP_DOWN:
+                    const {options, label} = fieldProps as {
+                      options: DropdownItem[];
+                      label: string;
+                    };
+                    const raw = values[name];
+                    const dropdownValue = typeof raw === 'string' ? raw : null;
                     fieldComponent = (
                       <DropdownComponent
-                        {...(fieldProps as DropdownProps)}
-                        value={values?.[name]}
+                        // {...(fieldProps as DropdownProps)}
+                        options={options}
+                        label={label}
+                        value={dropdownValue}
                         onChange={(item: DropdownItem) =>
                           setFieldValue(name, item.value)
                         }
