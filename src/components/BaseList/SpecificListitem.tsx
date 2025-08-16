@@ -2,7 +2,7 @@ import React from 'react';
 import { PressableOpacity } from '../Buttons/PressebleOpacity';
 import { Typography } from '../Typography';
 import { COLORS } from '../../Theme/Colors';
-import { styles } from '../../screens/Registration/styles';
+import { styles } from '../../Screens/Registration/styles';
 import { styling } from '../../Theme/Styles/GlobalStyles';
 import { Spacer } from '../Spacer';
 import { SecurityQuestion } from '../../Types/StudentService';

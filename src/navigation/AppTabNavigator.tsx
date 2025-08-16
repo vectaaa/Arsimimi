@@ -4,12 +4,12 @@ import {StyleSheet} from 'react-native';
 import {AppTabParamList} from './types';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {COLORS} from '../Theme/Colors';
-import Dashboard from '../screens/Dashboard';
+import Dashboard from '../Screens/Dashboard';
 import {Icons} from '../Theme/Icons';
-import Activity from '../screens/Activity';
-import Community from '../screens/Community';
-import Help from '../screens/Help';
-import Settings from '../screens/Settings';
+import Activity from '../Screens/Activity';
+import Community from '../Screens/Community';
+import Help from '../Screens/Help';
+import Settings from '../Screens/Settings';
 
 const Tab = createBottomTabNavigator<AppTabParamList>();
 

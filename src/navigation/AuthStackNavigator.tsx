@@ -1,17 +1,17 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AuthStackParamList} from './types';
-import {Register} from '../screens/Registration/Register';
+import {Register} from '../Screens/Registration/Register';
 // import {NavigationContainer} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useEffect, useState} from 'react';
-import OnboardingScreen from '../screens/OnboardingScreen';
-import {LoginScreen} from '../screens/LoginScreen';
+import OnboardingScreen from '../Screens/OnboardingScreen';
+import {LoginScreen} from '../Screens/LoginScreen';
 // import LoginScreen from '../Screens/LoginScreen';
-import ConfirmEmail from '../screens/Registration/ConfirmEmail';
-import PersonalRegistration from '../screens/Registration/PersonalRegistration';
-import LearningProfileOne from '../screens/Registration/LearningProfileOne';
-import LearningProfileTwo from '../screens/Registration/LearningProfileTwo';
-import LearningTime from '../screens/Registration/LearningTime';
+import ConfirmEmail from '../Screens/Registration/ConfirmEmail';
+import PersonalRegistration from '../Screens/Registration/PersonalRegistration';
+import LearningProfileOne from '../Screens/Registration/LearningProfileOne';
+import LearningProfileTwo from '../Screens/Registration/LearningProfileTwo';
+import LearningTime from '../Screens/Registration/LearningTime';
 import React from 'react';
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
