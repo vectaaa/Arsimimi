@@ -16,8 +16,7 @@ import {addRequest, removeRequest} from '../Store/Common/commonSlice';
 import {getSessionID} from '../Utils/storage/authStorage';
 import {logout} from '../Utils/logout';
 
-export const API_URL =
-  'https://redirecter-anjz.onrender.com/tima-service/api/v1/';
+export const API_URL = 'https://tima-service.onrender.com/tima-service/api/v1/';
 const SPECIFIC_RESPONSE_CODE_URLS = [`${API_URL}${ENDPOINTS.LOGIN}`];
 console.log(SPECIFIC_RESPONSE_CODE_URLS, 'rer');
 

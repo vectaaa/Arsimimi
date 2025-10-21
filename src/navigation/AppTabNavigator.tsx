@@ -10,6 +10,8 @@ import Activity from '../Screens/Activity';
 import Community from '../Screens/Community';
 import Help from '../Screens/Help';
 import Settings from '../Screens/Settings';
+import { HelpStackNavigator } from './HelpStackNavigator';
+import { HomeStackNavigator } from './HomeStackNavigator';
 
 const Tab = createBottomTabNavigator<AppTabParamList>();
 

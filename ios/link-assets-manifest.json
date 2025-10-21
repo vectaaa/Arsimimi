@@ -16,6 +16,18 @@
     {
       "path": "src/assets/fonts/georgiaz.ttf",
       "sha1": "c093a9eabcf4e3c233afef89285f1662798d2086"
+    },
+    {
+      "path": "src/assets/fonts/gill-sans-ultra-bold.ttf",
+      "sha1": "f5d9da558e5935e5fd5655bb44df001ef00e365c"
+    },
+    {
+      "path": "src/assets/fonts/gill-sans-ultrabold.ttf",
+      "sha1": "f5d9da558e5935e5fd5655bb44df001ef00e365c"
+    },
+    {
+      "path": "src/assets/fonts/GillSansUltraBold.otf",
+      "sha1": "3f60f4a61b0aadab1fddd748943d107c4e51ba8f"
     }
   ]
 }

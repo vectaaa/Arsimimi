@@ -13,6 +13,8 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import LinearGradient from 'react-native-linear-gradient';
 import {FlatList} from 'react-native-gesture-handler';
 import {IMAGES} from '../Theme/Images';
+import {Typography} from '../Typography';
+import {COLORS} from '../Theme/Colors';
 
 // Get the width of the screen
 const {width, height} = Dimensions.get('window');
@@ -30,7 +32,7 @@ const slides: SlidesTypes[] = [
   {
     id: '1',
     image: IMAGES.ONBOARDING1,
-    title: 'Structure \nyour learning',
+    title: 'Unlimited Study Material',
     subtitle:
       'We’ll help you achieve your full potential by providing the tools to achieve your goals',
   },
@@ -48,13 +50,7 @@ const slides: SlidesTypes[] = [
     subtitle:
       'We’ll help you achieve your full potential by providing the tools to achieve your goals',
   },
-  {
-    id: '4',
-    image: IMAGES.ONBOARDING4,
-    title: 'Monitor your \nchild’s progress',
-    subtitle:
-      'We’ll help you achieve your full potential by providing the tools to achieve your goals',
-  },
+  
 ];
 
 const OnboardingScreen = ({navigation}: any) => {
@@ -71,11 +67,10 @@ const OnboardingScreen = ({navigation}: any) => {
     };
     return (
       <View style={[styles.sliderStyle, {width, height}]}>
+        <View style={styles.titleViewStyle}>
+          <Text style={styles.arsi}>ARSIMIMI</Text>
+        </View>
         <View style={styles.horizonStretch}>
-          <View style={styles.titleViewStyle}>
-            <Text style={styles.title}>{item.title}</Text>
-            <View style={styles.rectangle} />
-          </View>
           {currentSlideIndex === slides.length - 1 ? (
             <TouchableOpacity onPress={() => navigation.replace('Register')}>
               <Text style={styles.skipStyle}>Finish</Text>
@@ -93,6 +88,7 @@ const OnboardingScreen = ({navigation}: any) => {
           ]}>
           <View style={styles.imageSubtitleContainer}>
             <Image source={item.image} style={styles.sliderImage} />
+            <Text style={styles.title}>{item.title}</Text>
             {/* <LinearGradient colors={[]}/> */}
             <Text style={styles.subtitle} numberOfLines={2}>
               {item.subtitle}
@@ -103,38 +99,38 @@ const OnboardingScreen = ({navigation}: any) => {
     );
   };
   // eslint-disable-next-line react/no-unstable-nested-components
-  const Footer = () => {
-    return (
-      <View style={styles.footerView1}>
-        {currentSlideIndex === slides.length - 1 ? (
-          <View>
-            <View style={styles.buttonGetStarted}>
-              <TouchableOpacity
-                style={styles.btn}
-                onPress={() => navigation.replace('Register')}>
-                <Text style={styles.loginText}>Login</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        ) : (
-          <View style={styles.footerView2}>
-            {slides.map((_, index) => (
-              <View
-                key={index}
-                style={[
-                  styles.indicator,
-                  currentSlideIndex === index && {
-                    backgroundColor: '#D27A24',
-                    width: 24,
-                  },
-                ]}
-              />
-            ))}
-          </View>
-        )}
-      </View>
-    );
-  };
+  // const Footer = () => {
+  //   return (
+  //     <View style={styles.footerView1}>
+  //       {currentSlideIndex === slides.length - 1 ? (
+  //         <View>
+  //           <View style={styles.buttonGetStarted}>
+  //             <TouchableOpacity
+  //               style={styles.btn}
+  //               onPress={() => navigation.replace('Register')}>
+  //               <Text style={styles.loginText}>Login</Text>
+  //             </TouchableOpacity>
+  //           </View>
+  //         </View>
+  //       ) : (
+  //         <View style={styles.footerView2}>
+  //           {slides.map((_, index) => (
+  //             <View
+  //               key={index}
+  //               style={[
+  //                 styles.indicator,
+  //                 currentSlideIndex === index && {
+  //                   backgroundColor: COLORS.ORANGE_NORMAL,
+  //                   width: 24,
+  //                 },
+  //               ]}
+  //             />
+  //           ))}
+  //         </View>
+  //       )}
+  //     </View>
+  //   );
+  // };
 
   const updateCurrentSLideIndex = (e: any) => {
     const contentOffsetX = e.nativeEvent.contentOffset.x;
@@ -160,7 +156,7 @@ const OnboardingScreen = ({navigation}: any) => {
             snapToAlignment="center"
             decelerationRate="fast"
           />
-          <Footer />
+          {/* <Footer /> */}
         </View>
       </SafeAreaView>
     </LinearGradient>
@@ -175,8 +171,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  arsi: {
+    fontFamily: 'gill-ultra-bold',
+  },
   titleViewStyle: {
-    paddingBottom: 70,
+    alignSelf: 'center',
+    alignContent: 'center',
+    justifyContent: 'center',
   },
   sliderStyle: {
     flex: 1,
@@ -200,14 +201,13 @@ const styles = StyleSheet.create({
     fontFamily: 'georgia',
     lineHeight: 19.5,
     width: '85%',
+
   },
   sliderImage: {
     resizeMode: 'contain',
     alignSelf: 'center',
     justifyContent: 'center',
     width: '100%',
-    // paddingBottom: 100,
-    // height: '0%',
   },
   imageSubtitleContainer: {
     width: '100%',

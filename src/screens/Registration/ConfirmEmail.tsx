@@ -19,7 +19,7 @@ export type ConfirmEmailProps = {
 };
 const ConfirmEmail = ({
   navigation,
-  // route,
+  route,
 }: AuthStackScreenProps<'ConfirmEmail'>) => {
   // const {onContinue, barLength} = route.params;
 
@@ -44,7 +44,7 @@ const ConfirmEmail = ({
       })
       .catch(error => {
         console.log('Verification Failed', error);
-        Alert.alert('Verification Failed', 'The OTP you entered is incorrect.');
+        Alert.alert('Verification Failed', error.error);
       });
   };
 
