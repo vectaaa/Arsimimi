@@ -12,7 +12,7 @@ import {
 import {styling} from '../../Theme/Styles/GlobalStyles';
 
 export type ButtonProps = PressableOpacityProps & {
-  title?: string;
+  title: string;
   color?: ColorValue;
   outline?: boolean;
   small?: boolean;
@@ -122,17 +122,17 @@ const MIN_SIZE = 44;
 const styles = StyleSheet.create({
   buttonContainer: {
     justifyContent: 'center',
-    marginBottom: 24,
-    alignSelf: 'flex-start',
+    marginBottom: 20,
+    alignSelf: 'stretch',
+    width: '100%',
   },
   button: {
     ...styling.borderRadius,
     justifyContent: 'center',
     minHeight: MIN_SIZE,
+    alignItems: 'center',
     padding: 12,
-    paddingHorizontal: 29,
     paddingVertical: 8,
-    
   },
   buttonContent: {
     flexDirection: 'row',
@@ -141,6 +141,7 @@ const styles = StyleSheet.create({
   },
   defaultTextStyle: {
     flexShrink: 1,
+    textAlign: 'center',
   },
   loadingIndicator: {
     position: 'absolute',

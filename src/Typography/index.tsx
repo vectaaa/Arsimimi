@@ -17,7 +17,8 @@ export type FontWeight =
   | '500' // Medium
   | '700' // Bold
   | '800' // Heavy
-  | '900'; // Black
+  | '900' // Black
+  | '10';
 
 export type TypographyProps = TextProps & {
   size?: number;
@@ -48,6 +49,7 @@ export const Typography = ({
   const getFontFamily = () => {
     // prettier-ignore
     switch (weight) {
+      case '10' : return 'Gill Sans Ultra Bold';
       case '100': return `georgia${italic ? 'georgiai' : ''}`;
       case '300': return `georgia${italic ? 'georgiai' : ''}`;
       case '400': return `georgia${italic ? 'georgiai' : ''}`;
